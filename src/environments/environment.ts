@@ -3,7 +3,16 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
-  production: false
+  production: false,
+  firebase:{
+    apiKey: "AIzaSyA1q1vhHX_4xDub2KrhGU4sWPq49APYh1A",
+    authDomain: "chia-project-test.firebaseapp.com",
+    projectId: "chia-project-test",
+    storageBucket: "chia-project-test.appspot.com",
+    messagingSenderId: "432473981494",
+    appId: "1:432473981494:web:068b11282af2013c9a8e97",
+    measurementId: "G-9PPY9LBVET"
+  }
 };
 
 /*
