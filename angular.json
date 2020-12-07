@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/ChiaProject",
+            "outputPath": "dist",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -123,6 +123,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "ChiaProject"
+    }
+  },
+  "defaultProject": "ChiaProject",
+  "cli": {
+    "analytics": "f2d50765-ed94-4012-8ebe-19ddb912b332"
+  }
 }
