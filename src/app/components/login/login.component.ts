@@ -10,7 +10,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class LoginComponent implements OnInit {
   email: string='';
   password:string='';
-  loginFiled: boolean;
+  loginFailed: boolean;
   returnUrl: string;
 
   constructor(private auth: AuthService,
@@ -24,10 +24,10 @@ export class LoginComponent implements OnInit {
 
 
   login(): void{
-    this.loginFiled=false;
+    this.loginFailed=false;
 
     this.auth.login(this.email,this.password)
       .then(()=> this.router.navigateByUrl(this.returnUrl))
-      .catch(err=> this.loginFiled=true);
+      .catch(err=> this.loginFailed=true);
   }
 }

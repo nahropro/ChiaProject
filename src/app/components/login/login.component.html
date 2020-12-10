@@ -17,6 +17,8 @@
                 <input matInput type="password" placeholder="وشەی نهێنی" [(ngModel)]="password" name="password">
             </mat-form-field>
         </div>
+
+        <p *ngIf="loginFailed" class="alert alert-danger">ھەلەیە</p>
     
         <div>
             <button mat-raised-button color="primary" type="submit">
