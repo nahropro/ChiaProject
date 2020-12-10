@@ -1,5 +1,6 @@
 import { AuthService } from './../../services/auth.service';
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -9,13 +10,24 @@ import { Component, OnInit } from '@angular/core';
 export class LoginComponent implements OnInit {
   email: string='';
   password:string='';
+  loginFiled: boolean;
+  returnUrl: string;
 
-  constructor(private auth: AuthService) { }
+  constructor(private auth: AuthService,
+              private router: Router,
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
+    this.returnUrl=this.route.snapshot.queryParamMap.get('returnUrl') || '/';
   }
 
+
+
   login(): void{
-    this.auth.login(this.email,this.password).then(d=> console.log(d));
+    this.loginFiled=false;
+
+    this.auth.login(this.email,this.password)
+      .then(()=> this.router.navigateByUrl(this.returnUrl))
+      .catch(err=> this.loginFiled=true);
   }
 }

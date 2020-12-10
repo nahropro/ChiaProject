@@ -1,26 +1,28 @@
 <mat-card>
-    <mat-card-header>
-        <mat-card-title>چوونەژوورەوە</mat-card-title>
-    </mat-card-header>
-
-    <div>
-        <mat-form-field>
-            <mat-label>ئیمێڵ</mat-label>
-            <input matInput type="text" placeholder="ئیمێڵ" [(ngModel)]="email">
-        </mat-form-field>
-    </div>
-
-    <div>
-        <mat-form-field>
-            <mat-label>وشەی نهێنی</mat-label>
-            <input matInput type="password" placeholder="وشەی نهێنی" [(ngModel)]="password">
-        </mat-form-field>
-    </div>
-
-    <div>
-        <button mat-raised-button color="primary" type="button" (click)="login()">
-            <mat-icon>login</mat-icon>
-            چوونەژوورەوە
-        </button>
-    </div>
+    <form (keydown.enter)="login()" (ngSubmit)="login()">
+        <mat-card-header>
+            <mat-card-title>چوونەژوورەوە</mat-card-title>
+        </mat-card-header>
+    
+        <div>
+            <mat-form-field>
+                <mat-label>ئیمێڵ</mat-label>
+                <input matInput type="text" placeholder="ئیمێڵ" [(ngModel)]="email" name="email">
+            </mat-form-field>
+        </div>
+    
+        <div>
+            <mat-form-field>
+                <mat-label>وشەی نهێنی</mat-label>
+                <input matInput type="password" placeholder="وشەی نهێنی" [(ngModel)]="password" name="password">
+            </mat-form-field>
+        </div>
+    
+        <div>
+            <button mat-raised-button color="primary" type="submit">
+                <mat-icon>login</mat-icon>
+                چوونەژوورەوە
+            </button>
+        </div>
+    </form>
 </mat-card>
