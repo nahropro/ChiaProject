@@ -16,6 +16,7 @@ import { CreateFormComponent } from './components/create-form/create-form.compon
 import { UpdateFormComponent } from './components/update-form/update-form.component';
 import { ListFormComponent } from './components/list-form/list-form.component';
 import { FillFormComponent } from './components/fill-form/fill-form.component';
+import { NavBarComponent } from './components/nav-bar/nav-bar.component';
 
 @NgModule({
   declarations: [
@@ -24,7 +25,8 @@ import { FillFormComponent } from './components/fill-form/fill-form.component';
     CreateFormComponent,
     UpdateFormComponent,
     ListFormComponent,
-    FillFormComponent
+    FillFormComponent,
+    NavBarComponent
   ],
   imports: [
     BrowserModule,
