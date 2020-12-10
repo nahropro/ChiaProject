@@ -1,1 +1,20 @@
-<p>nav-bar works!</p>
+<mat-toolbar color="primary" class="navbar">
+    <div class="container">
+        <button *ngIf="currentUser" mat-icon-button class="icon home-icon" routerLink="/form">
+            <mat-icon>home</mat-icon>
+        </button>
+        
+        <span class="spacer"></span>
+        
+        <div *ngIf="currentUser">
+            <button mat-button [matMenuTriggerFor]="menu">{{currentUser?.email}} <mat-icon>arrow_drop_down</mat-icon></button>
+            <mat-menu #menu="matMenu">
+                <button mat-menu-item (click)="logout()"><mat-icon>logout</mat-icon> چوونەدەرەوە</button>
+            </mat-menu>
+        </div>
+        
+        <button *ngIf="!currentUser" mat-icon-button class="icon login-icon" routerLink="/login">
+            <mat-icon>login</mat-icon>
+        </button>
+    </div>
+</mat-toolbar>
