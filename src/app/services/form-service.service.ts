@@ -1,3 +1,5 @@
+import { map } from 'rxjs/operators';
+import { Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/firestore';
 import { Form } from './../models/form.model';
@@ -15,8 +17,17 @@ export class FormServiceService {
   create(personalInfo: PersonalInfo){
     let form: Form={
       personalInfo:{...personalInfo}
-    }
+    } as Form;
 
     return this.db.collection('forms').add(Object.assign({},form));
+  }
+
+  getAll():Observable<Form[]>{
+    return this.db.collection('forms').snapshotChanges().pipe(map(d=> d.map(f=> {
+      return {
+        id: f.payload.doc.id,
+        ...f.payload.doc.data() as Object
+      } as Form
+    })))
   }
 }

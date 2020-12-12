@@ -1,21 +1,20 @@
-import { AuthGuardService } from './services/auth-guard.service';
-import { FillFormComponent } from './components/fill-form/fill-form.component';
-import { UpdateFormComponent } from './components/update-form/update-form.component';
-import { CreateFormComponent } from './components/create-form/create-form.component';
-import { ListFormComponent } from './components/list-form/list-form.component';
 import { NgModule } from '@angular/core';
-import { Routes, RouterModule } from '@angular/router';
+import { RouterModule, Routes } from '@angular/router';
+import { CreateFormComponent } from './components/create-form/create-form.component';
+import { FillFormComponent } from './components/fill-form/fill-form.component';
+import { ListFormComponent } from './components/list-form/list-form.component';
 import { LoginComponent } from './components/login/login.component';
+import { AuthGuardService } from './services/auth-guard.service';
 
 const routes: Routes = [
   {path: '', redirectTo: '/form', pathMatch:'full'},
 
   {path: 'login', component: LoginComponent},
 
-  {path: 'form', component: ListFormComponent, canActivate: [AuthGuardService]},
+  {path: 'form/update/:id', component: CreateFormComponent, canActivate: [AuthGuardService]},
   {path: 'form/create', component: CreateFormComponent, canActivate: [AuthGuardService]},
-  {path: 'form/update/:id', component: UpdateFormComponent, canActivate: [AuthGuardService]},
   {path: 'form/fill', component: FillFormComponent},
+  {path: 'form', component: ListFormComponent, canActivate: [AuthGuardService]},
 
   {path: '**', component: LoginComponent}
 ];

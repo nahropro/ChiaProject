@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { PersonalInfo } from 'src/app/models/personal-info.model';
 import { FormServiceService } from './../../services/form-service.service';
 
@@ -12,7 +12,8 @@ export class CreateFormComponent implements OnInit {
   @Input() data: PersonalInfo=new PersonalInfo();
   
   constructor(private formService: FormServiceService,
-    private router: Router) { }
+              private router: Router,
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
   }
