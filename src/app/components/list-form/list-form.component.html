@@ -1,6 +1,6 @@
 <mat-form-field class="row" appearance="fill">
     <mat-label>گەڕان</mat-label>
-    <input type="text" matInput placeholder="گەڕان">
+    <input type="text" matInput placeholder="گەڕان" name="filterText" [(ngModel)]="filterText" (keyup)="filter()" (change)="filter()">
     <mat-icon matSuffix>search</mat-icon>
 </mat-form-field>
 
@@ -9,9 +9,9 @@
     <mat-icon>add</mat-icon>
 </button>
 
-<mat-card *ngIf="forms$ | async as forms">
+<mat-card *ngIf="filterForms">
     <mat-list>
-        <ng-container *ngFor="let form of forms; let lastItem = last;">
+        <ng-container *ngFor="let form of filterForms; let lastItem = last;">
             <mat-list-item>
                 <div class="row">
                     <div class="col name-div">
