@@ -19,6 +19,7 @@ import { MatrialsModule } from './modules/matrials-module';
 import { AccountService } from './services/account.service';
 import { AuthService } from './services/auth.service';
 import { FormServiceService } from './services/form-service.service';
+import { ClipboardModule } from '@angular/cdk/clipboard';
 
 
 @NgModule({
@@ -40,7 +41,8 @@ import { FormServiceService } from './services/form-service.service';
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
     AngularFirestoreModule,
-    CommonModule
+    CommonModule,
+    ClipboardModule
   ],
   providers: [
     AuthService,

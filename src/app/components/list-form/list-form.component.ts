@@ -5,6 +5,7 @@ import { Form } from 'src/app/models/form.model';
 import { DialogData } from 'src/app/models/dialog-data.model';
 import { YesNoDialogComponent } from '../yes-no-dialog/yes-no-dialog.component';
 import { MatDialog } from '@angular/material/dialog';
+import { Clipboard } from "@angular/cdk/clipboard"
 
 @Component({
   selector: 'app-list-form',
@@ -15,7 +16,8 @@ export class ListFormComponent implements OnInit {
   forms$: Observable<Form[]>;
 
   constructor(private formService: FormServiceService,
-              private dialog: MatDialog) { }
+              private dialog: MatDialog,
+              private clipboard: Clipboard) { }
 
   ngOnInit(): void {
     this.forms$ = this.formService.getAll();
@@ -36,5 +38,9 @@ export class ListFormComponent implements OnInit {
         this.formService.delete(id);
       }
     });
+  }
+
+  copyLink(id: string){
+    this.clipboard.copy(window.location.host + '/form/fill/' + id);
   }
 }
