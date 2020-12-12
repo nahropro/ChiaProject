@@ -16,3 +16,15 @@ mat-list-item{
 .row{
     width: 100%;
 }
+
+mat-label {
+    color: #424242;
+}
+
+.mat-input-element {
+    color: #424242;
+}
+
+.mat-input-element::placeholder {
+    color: #424242;
+}

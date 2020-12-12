@@ -13,7 +13,7 @@ const routes: Routes = [
 
   {path: 'form/update/:id', component: CreateFormComponent, canActivate: [AuthGuardService]},
   {path: 'form/create', component: CreateFormComponent, canActivate: [AuthGuardService]},
-  {path: 'form/fill', component: FillFormComponent},
+  {path: 'form/fill/:id', component: FillFormComponent},
   {path: 'form', component: ListFormComponent, canActivate: [AuthGuardService]},
 
   {path: '**', component: LoginComponent}
