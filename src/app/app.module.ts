@@ -1,3 +1,4 @@
+import { YesNoDialogComponent } from './components/yes-no-dialog/yes-no-dialog.component';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { AngularFireModule } from '@angular/fire';
@@ -27,7 +28,8 @@ import { FormServiceService } from './services/form-service.service';
     CreateFormComponent,
     ListFormComponent,
     FillFormComponent,
-    NavBarComponent
+    NavBarComponent,
+    YesNoDialogComponent
   ],
   imports: [
     BrowserModule,

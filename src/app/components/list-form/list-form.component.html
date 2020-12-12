@@ -12,16 +12,16 @@
                         {{form.personalInfo.fullName}}
                     </div>
                     <div class="col-auto">
-                        <button mat-button color="primary" title="زیاتر">
+                        <button mat-button color="accent" title="زیاتر">
                             <mat-icon>web_asset</mat-icon>
                         </button>
-                        <button mat-button color="primary" title="چاككردن" [routerLink]="['/form/update',form.id]">
+                        <button mat-button color="accent" title="چاككردن" [routerLink]="['/form/update',form.id]">
                             <mat-icon>edit</mat-icon>
                         </button>
-                        <button mat-button color="warn" title="سڕینەوە">
+                        <button mat-button color="warn" title="سڕینەوە" (click)="delete(form.id)">
                             <mat-icon>delete</mat-icon>
                         </button>
-                        <button mat-button color="primary" title="لەبەرگرتنەوەی بەستەر">
+                        <button mat-button color="accent" title="لەبەرگرتنەوەی بەستەر">
                             <mat-icon>file_copy</mat-icon>
                         </button>
                     </div>

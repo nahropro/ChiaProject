@@ -30,4 +30,16 @@ export class FormServiceService {
       } as Form
     })))
   }
+
+  get(id: string) : Observable<Form>{
+    return this.db.collection('forms').doc(id).valueChanges() as Observable<Form>;
+  }
+
+  update(id: string, form: Form){
+    return this.db.collection('forms').doc(id).update(form);
+  }
+
+  delete(id: string){
+    return this.db.collection('forms').doc(id).delete();
+  }
 }

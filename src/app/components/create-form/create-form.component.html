@@ -1,4 +1,4 @@
-<mat-card>
+<mat-card *ngIf="editMode || !id">
     <div class="row">
         <mat-form-field class="col-lg-4 col-sm">
             <input type="text" matInput placeholder="ناو" name="fullName" [(ngModel)]="data.fullName" required>
@@ -111,8 +111,9 @@
         </mat-form-field>
 
         <div class="col-12">
-            <button mat-mini-fab color="primary" class="add-button" (click)="create()">
-                <mat-icon>add</mat-icon>
+            <button mat-mini-fab color="primary" class="add-button" (click)="update()">
+                <mat-icon *ngIf="!id">add</mat-icon>
+                <mat-icon *ngIf="id">edit</mat-icon>
             </button>
         </div>
     </div>
