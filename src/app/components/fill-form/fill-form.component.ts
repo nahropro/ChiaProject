@@ -21,14 +21,20 @@ export class FillFormComponent implements OnInit {
   ngOnInit(): void {
     this.id=this.route.snapshot.paramMap.get('id');
 
-    this.formService.get(this.id).pipe(take(1)).subscribe(d=> this.data=d);
+    this.formService.get(this.id).pipe(take(1)).subscribe(d=> {this.data=d; console.log(d);});
   }
 
-  fillForm(valid: boolean){
+  sendForm(valid: boolean){
     console.log(valid,this.data);
   }
 
-  formChange(){
-    console.log(this.data);
+  saveForm(){
+    // this.formService.update(this.id,this.data)
+    //   .then(d=>{
+    //     console.log('Success');
+    //   })
+    //   .catch(err=> {
+    //     console.error('Fail');
+    //   });
   }
 }

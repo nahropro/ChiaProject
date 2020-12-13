@@ -4,45 +4,72 @@
 
         <P class="text-primary">هاوپیشە و پسپۆڕی خۆشەویست...</P>
 
-        <P>پاش سڵاو، بەندە بۆ تەواوكردنی ماستەرنامەكەم خەریكی لێكۆڵینەوەیەكم بە ناونیشانی: ( تۆماركردنی بەرنامەی ستراتیژی بۆ گەشەی بەشی وەرزشیی فووتساڵ لە شاری كەلار/هەرێمی كوردستان)، بە دڵنیاییەوە تێڕوانینی ڕاستەكی (واقعییانە)ی ئێوە، گرنگییەكی زۆری هەیە و لە ڕەوتی جێبەجێبوونی ئەم لێكۆڵێنەوەیەدا زۆر بە نرخ و بەسوود دەبێت. تكاكارم بە بۆچوونە بەنرخەكانتان، لە ئەنجامدانی ئەم لێكۆڵینەوەیەدا هاوكاری لێكۆڵەر بن. بشزانن كە زانیارییەكانی ئەم ڕاپرسییە لای لێكۆڵەر پارێزراو دەبێت. پێشەكی سوپاسسی هاوكاری و یارمەتیتانن دەكەم.</P>
+        <P>پاش سڵاو، بەندە بۆ تەواوكردنی ماستەرنامەكەم خەریكی لێكۆڵینەوەیەكم بە ناونیشانی: ( تۆماركردنی بەرنامەی
+            ستراتیژی بۆ گەشەی بەشی وەرزشیی فووتساڵ لە شاری كەلار/هەرێمی كوردستان)، بە دڵنیاییەوە تێڕوانینی ڕاستەكی
+            (واقعییانە)ی ئێوە، گرنگییەكی زۆری هەیە و لە ڕەوتی جێبەجێبوونی ئەم لێكۆڵێنەوەیەدا زۆر بە نرخ و بەسوود دەبێت.
+            تكاكارم بە بۆچوونە بەنرخەكانتان، لە ئەنجامدانی ئەم لێكۆڵینەوەیەدا هاوكاری لێكۆڵەر بن. بشزانن كە
+            زانیارییەكانی ئەم ڕاپرسییە لای لێكۆڵەر پارێزراو دەبێت. پێشەكی سوپاسسی هاوكاری و یارمەتیتانن دەكەم.</P>
 
         <p class="text-primary text-left">لەگەڵ ڕێزمدا-</p>
 
         <p class="text-primary text-left">خوێندكاری ماستەر لە كارگێڕیی ستراتیژی وەرزشی</p>
+
+        <div class="alert alert-info">
+            <ul>
+                <li>
+                    <p>پێویستە هەموو زانیارییەكان پڕبكرێتەوە.</p>
+                </li>
+                <li>
+                    <p>هەموو زانیارییەكان بە شێوەیەكی خودكاری تۆمار دەبێت، بەڵام بۆ تەواوكردن و ناردنی پێویستە هەموو زانیاریییەكان پڕبكەیتەوە و پاشان كلیك لەسەر ناردن بكەیت.</p>
+                </li>
+                <li>
+                    <p>پاش ناردنی فۆرمەكە دووبارە ناتواندرێت دەسكاری بكرێت.</p>
+                </li>
+            </ul>
+        </div>
     </div>
 
-    <form #f="ngForm" (ngSubmit)="fillForm(f.valid)">
-        <button mat-mini-fab color="primary" type="submit" class="add-button-top" [disabled]="f.invalid">
-            <mat-icon>article</mat-icon>
+    <form #f="ngForm" (ngSubmit)="sendForm(f.valid)">
+        <button mat-mini-fab color="primary" type="submit" class="add-button-top" title="ناردن" [disabled]="f.invalid">
+            <mat-icon>send</mat-icon>
         </button>
-        
+
+        <button mat-mini-fab color="primary" type="button" (click)="saveForm()" title="تۆماركردن" class="add-button-top">
+            <mat-icon>save</mat-icon>
+        </button>
+
         <mat-card>
             <mat-card-header>
                 <mat-card-title>زانیاری كەسی</mat-card-title>
             </mat-card-header>
             <mat-card-content>
-                <app-form-personal-info [data]="data.personalInfo" (formChange)="formChange()" [fillFormMode]="true"></app-form-personal-info>
+                <app-form-personal-info [(data)]="data.personalInfo" (formChange)="saveForm()" [fillFormMode]="true">
+                </app-form-personal-info>
             </mat-card-content>
         </mat-card>
-         
+
         <div class="margin-top">
-            <app-form-question-group [data]="data.questionGroup1"></app-form-question-group>
+            <app-form-question-group [(data)]="data.questionGroup1" (formChange)="saveForm()"></app-form-question-group>
         </div>
-        
+
         <div class="margin-top">
-            <app-form-question-group [data]="data.questionGroup2"></app-form-question-group>
+            <app-form-question-group [(data)]="data.questionGroup2" (formChange)="saveForm()"></app-form-question-group>
         </div>
-        
+
         <div class="margin-top">
-            <app-form-question-group [data]="data.questionGroup3"></app-form-question-group>
+            <app-form-question-group [(data)]="data.questionGroup3" (formChange)="saveForm()"></app-form-question-group>
         </div>
-        
+
         <div class="margin-top">
-            <app-form-question-group [data]="data.questionGroup4"></app-form-question-group>
+            <app-form-question-group [(data)]="data.questionGroup4" (formChange)="saveForm()"></app-form-question-group>
         </div>
-        
-        <button mat-mini-fab color="primary" type="submit" class="add-button-bottom" [disabled]="f.invalid">
-            <mat-icon>article</mat-icon>
+
+        <button mat-mini-fab color="primary" type="submit" class="add-button-bottom" title="ناردن" [disabled]="f.invalid">
+            <mat-icon>send</mat-icon>
+        </button>
+
+        <button mat-mini-fab color="primary" type="button" (click)="saveForm()" title="تۆماركردن" class="add-button-bottom">
+            <mat-icon>save</mat-icon>
         </button>
     </form>
 </div>

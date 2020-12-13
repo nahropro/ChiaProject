@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { QuestionGroup } from 'src/app/models/question-group.model';
 
 @Component({
@@ -8,10 +8,14 @@ import { QuestionGroup } from 'src/app/models/question-group.model';
 })
 export class FormQuestionGroupComponent implements OnInit {
   @Input() data: QuestionGroup;
+  @Output() formChange:EventEmitter<null> = new EventEmitter()
   
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  formChangeEvent(){
+    this.formChange.emit();
+  }
 }

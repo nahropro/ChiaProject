@@ -7,7 +7,7 @@
         <div class="col-md-6">
             <mat-form-field>
                 <mat-label>دۆخی ئارایی (ئەوەی كە ئێستا هەیە)</mat-label>
-                <mat-select [(value)]="data.normalAnswer" name="normalAnswer" ngModel required>
+                <mat-select [(ngModel)]="data.normalAnswer" [name]="data" (selectionChange)="selectionChange()" required>
                     <mat-option></mat-option>
                     <mat-option value="زۆر زۆر">
                         زۆر زۆر
@@ -31,7 +31,7 @@
         <div class="col-md-6">
             <mat-form-field>
                 <mat-label>دۆخی خوازراو (ئەوەی كە ئێستا دەبێت هەبێت)</mat-label>
-                <mat-select [(value)]="data.wantedAnswer" name="wantedAnswer" ngModel required>
+                <mat-select [(value)]="data.wantedAnswer" (selectionChange)="selectionChange()" required>
                     <mat-option></mat-option>
                     <mat-option value="زۆر زۆر">
                         زۆر زۆر

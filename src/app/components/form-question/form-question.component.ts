@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ControlContainer, NgForm } from '@angular/forms';
 import { Question } from 'src/app/models/question.model';
 
@@ -10,9 +10,14 @@ import { Question } from 'src/app/models/question.model';
 })
 export class FormQuestionComponent implements OnInit {
   @Input() data: Question;
+  @Output() formChange:EventEmitter<null> = new EventEmitter()
+
   constructor() { }
 
   ngOnInit(): void {
   }
 
+  selectionChange(){
+    this.formChange.emit();
+  }
 }

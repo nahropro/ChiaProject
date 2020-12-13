@@ -3,8 +3,8 @@
         <mat-card-title>{{data.title}}</mat-card-title>
     </mat-card-header>
     <mat-card-content>
-        <ng-container *ngFor="let q of data.questions; let lastItem = last;">
-            <app-form-question [data]="q"></app-form-question>
+        <ng-container *ngFor="let q of data.questions;let index=index; let lastItem = last;">
+            <app-form-question [(data)]="data.questions[index]" (formChange)="formChangeEvent()"></app-form-question>
             <mat-divider *ngIf="!lastItem"></mat-divider>
         </ng-container>
     </mat-card-content>
