@@ -11,12 +11,12 @@
         <p class="text-primary text-left">خوێندكاری ماستەر لە كارگێڕیی ستراتیژی وەرزشی</p>
     </div>
 
-    <form #f="ngForm">
-        <button mat-mini-fab color="primary" (click)="fillForm()" class="add-button-top" disabled>
+    <form #f="ngForm" (ngSubmit)="fillForm(f.valid)">
+        <button mat-mini-fab color="primary" type="submit" class="add-button-top" [disabled]="f.invalid">
             <mat-icon>article</mat-icon>
         </button>
         
-        <app-create-form [data]="data.personalData"></app-create-form>
+        <!-- <app-create-form [data]="data.personalInfo"></app-create-form> -->
          
         <div class="margin-top">
             <app-form-question-group [data]="data.questionGroup1"></app-form-question-group>
@@ -34,8 +34,8 @@
             <app-form-question-group [data]="data.questionGroup4"></app-form-question-group>
         </div>
         
-        <button mat-mini-fab color="primary" (click)="fillForm()" class="add-button-bottom">
+        <button mat-mini-fab color="primary" type="submit" class="add-button-bottom" [disabled]="f.invalid">
             <mat-icon>article</mat-icon>
         </button>
     </form>
-</div>؟
+</div>

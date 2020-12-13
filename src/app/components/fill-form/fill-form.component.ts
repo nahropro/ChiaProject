@@ -1,5 +1,5 @@
 import { Form } from 'src/app/models/form.model';
-import { questionGroup1, questionGroup2, questionGroup3, questionGroup4 } from './../../meta-data/form.meta-data';
+import { questionGroup1, questionGroup2, questionGroup3, questionGroup4, questionGroupTest } from './../../meta-data/form.meta-data';
 import { Component, OnInit } from '@angular/core';
 import { QuestionGroup } from 'src/app/models/question-group.model';
 
@@ -21,7 +21,7 @@ export class FillFormComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  fillForm(){
-    console.log(this.data);
+  fillForm(valid: boolean){
+    console.log(valid,this.data);
   }
 }

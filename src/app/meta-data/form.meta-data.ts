@@ -1,5 +1,18 @@
 import { QuestionGroup } from './../models/question-group.model';
 
+export const questionGroupTest : QuestionGroup={
+    title:'پرسە پەیوەستەكان بە خاڵە بەهێزەكانی فووتساڵ لە شاری كەلار',
+    questions:[
+        {
+            id: 1,
+            title:'زۆر حەزكردنی خەڵك لە فووتساڵ',
+            normalAnswer:'',
+            wantedAnswer:''
+        }
+    ]
+    
+};
+
 export const questionGroup1 : QuestionGroup={
     title:'پرسە پەیوەستەكان بە خاڵە بەهێزەكانی فووتساڵ لە شاری كەلار',
     questions:[
