@@ -1,0 +1,30 @@
+.add-button-top{
+    transform: translate(-50%, 50%);
+    z-index: 1000;
+}
+
+.add-button-bottom{
+    transform: translate(-50%, -50%);
+    z-index: 1000;
+}
+
+.margin-top{
+    margin-top: 15px;
+}
+
+.form-page{
+    padding: 30px;
+    background-color: #ba7b3f;
+    border-radius: 10px;
+}
+
+// .form-text>h1{
+//     text-align: center;
+// }
+
+.form-text>p{
+    font-size: large;
+    text-align: justify;
+    text-justify: inter-word;
+    line-height: 1.6;
+}

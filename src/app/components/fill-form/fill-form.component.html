@@ -1,14 +1,41 @@
-<button mat-mini-fab color="primary" (click)="fillForm()" class="add-button">
-    <mat-icon>article</mat-icon>
-</button>
+<div class="form-page">
+    <div class="form-text text-center">
+        <h1 class="text-primary">بەناوی خودا</h1>
 
-<app-create-form [data]="data.personalData"></app-create-form>
+        <P class="text-primary">هاوپیشە و پسپۆڕی خۆشەویست...</P>
 
-<app-form-question-group [data]="data.questionGroup1"></app-form-question-group>
-<app-form-question-group [data]="data.questionGroup2"></app-form-question-group>
-<app-form-question-group [data]="data.questionGroup3"></app-form-question-group>
-<app-form-question-group [data]="data.questionGroup4"></app-form-question-group>
+        <P>پاش سڵاو، بەندە بۆ تەواوكردنی ماستەرنامەكەم خەریكی لێكۆڵینەوەیەكم بە ناونیشانی: ( تۆماركردنی بەرنامەی ستراتیژی بۆ گەشەی بەشی وەرزشیی فووتساڵ لە شاری كەلار/هەرێمی كوردستان)، بە دڵنیاییەوە تێڕوانینی ڕاستەكی (واقعییانە)ی ئێوە، گرنگییەكی زۆری هەیە و لە ڕەوتی جێبەجێبوونی ئەم لێكۆڵێنەوەیەدا زۆر بە نرخ و بەسوود دەبێت. تكاكارم بە بۆچوونە بەنرخەكانتان، لە ئەنجامدانی ئەم لێكۆڵینەوەیەدا هاوكاری لێكۆڵەر بن. بشزانن كە زانیارییەكانی ئەم ڕاپرسییە لای لێكۆڵەر پارێزراو دەبێت. پێشەكی سوپاسسی هاوكاری و یارمەتیتانن دەكەم.</P>
 
-<button mat-mini-fab color="primary" (click)="fillForm()" class="add-button">
-    <mat-icon>article</mat-icon>
-</button>
+        <p class="text-primary text-left">لەگەڵ ڕێزمدا-</p>
+
+        <p class="text-primary text-left">خوێندكاری ماستەر لە كارگێڕیی ستراتیژی وەرزشی</p>
+    </div>
+
+    <form #f="ngForm">
+        <button mat-mini-fab color="primary" (click)="fillForm()" class="add-button-top" disabled>
+            <mat-icon>article</mat-icon>
+        </button>
+        
+        <app-create-form [data]="data.personalData"></app-create-form>
+         
+        <div class="margin-top">
+            <app-form-question-group [data]="data.questionGroup1"></app-form-question-group>
+        </div>
+        
+        <div class="margin-top">
+            <app-form-question-group [data]="data.questionGroup2"></app-form-question-group>
+        </div>
+        
+        <div class="margin-top">
+            <app-form-question-group [data]="data.questionGroup3"></app-form-question-group>
+        </div>
+        
+        <div class="margin-top">
+            <app-form-question-group [data]="data.questionGroup4"></app-form-question-group>
+        </div>
+        
+        <button mat-mini-fab color="primary" (click)="fillForm()" class="add-button-bottom">
+            <mat-icon>article</mat-icon>
+        </button>
+    </form>
+</div>؟
