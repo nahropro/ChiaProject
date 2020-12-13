@@ -30,6 +30,9 @@
                         <button mat-button color="accent" title="لەبەرگرتنەوەی بەستەر" (click)="copyLink(form.id)">
                             <mat-icon>file_copy</mat-icon>
                         </button>
+                        <button mat-button color="accent" title="پڕكردنەوەی فۆرم" [routerLink]="['/form/fill',form.id]">
+                            <mat-icon>article</mat-icon>
+                        </button>
                     </div>
                 </div>
             </mat-list-item>

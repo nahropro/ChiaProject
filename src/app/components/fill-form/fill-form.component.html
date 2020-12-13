@@ -1,1 +1,14 @@
-<p>fill-form works!</p>
+<button mat-mini-fab color="primary" (click)="fillForm()" class="add-button">
+    <mat-icon>article</mat-icon>
+</button>
+
+<app-create-form [data]="data.personalData"></app-create-form>
+
+<app-form-question-group [data]="data.questionGroup1"></app-form-question-group>
+<app-form-question-group [data]="data.questionGroup2"></app-form-question-group>
+<app-form-question-group [data]="data.questionGroup3"></app-form-question-group>
+<app-form-question-group [data]="data.questionGroup4"></app-form-question-group>
+
+<button mat-mini-fab color="primary" (click)="fillForm()" class="add-button">
+    <mat-icon>article</mat-icon>
+</button>

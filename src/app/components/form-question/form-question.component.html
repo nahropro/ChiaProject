@@ -1,0 +1,55 @@
+<div class="main">
+    <div>
+        <p>{{data.title}}</p>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6">
+            <mat-form-field>
+                <mat-label>دۆخی ئارایی (ئەوەی كە ئێستا هەیە)</mat-label>
+                <mat-select [(value)]="data.normalAnswer" required> 
+                    <mat-option></mat-option>
+                    <mat-option value="زۆر زۆر">
+                        زۆر زۆر
+                    </mat-option>
+                    <mat-option value="زۆر">
+                        زۆر
+                    </mat-option>
+                    <mat-option value="مامناوەند">
+                        مامناوەند
+                    </mat-option>
+                    <mat-option value="كەم">
+                        كەم
+                    </mat-option>
+                    <mat-option value="زۆر كەم">
+                        زۆر كەم
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="col-md-6">
+            <mat-form-field>
+                <mat-label>دۆخی خوازراو (ئەوەی كە ئێستا دەبێت هەبێت)</mat-label>
+                <mat-select [(value)]="data.wantedAnswer" required> 
+                    <mat-option></mat-option>
+                    <mat-option value="زۆر زۆر">
+                        زۆر زۆر
+                    </mat-option>
+                    <mat-option value="زۆر">
+                        زۆر
+                    </mat-option>
+                    <mat-option value="مامناوەند">
+                        مامناوەند
+                    </mat-option>
+                    <mat-option value="كەم">
+                        كەم
+                    </mat-option>
+                    <mat-option value="زۆر كەم">
+                        زۆر كەم
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+</div>

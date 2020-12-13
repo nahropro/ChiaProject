@@ -20,6 +20,8 @@ import { AccountService } from './services/account.service';
 import { AuthService } from './services/auth.service';
 import { FormServiceService } from './services/form-service.service';
 import { ClipboardModule } from '@angular/cdk/clipboard';
+import { FormQuestionGroupComponent } from './components/form-question-group/form-question-group.component';
+import { FormQuestionComponent } from './components/form-question/form-question.component';
 
 
 @NgModule({
@@ -30,7 +32,9 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
     ListFormComponent,
     FillFormComponent,
     NavBarComponent,
-    YesNoDialogComponent
+    YesNoDialogComponent,
+    FormQuestionGroupComponent,
+    FormQuestionComponent
   ],
   imports: [
     BrowserModule,

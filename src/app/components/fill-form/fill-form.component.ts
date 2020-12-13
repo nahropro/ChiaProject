@@ -1,4 +1,7 @@
+import { Form } from 'src/app/models/form.model';
+import { questionGroup1, questionGroup2, questionGroup3, questionGroup4 } from './../../meta-data/form.meta-data';
 import { Component, OnInit } from '@angular/core';
+import { QuestionGroup } from 'src/app/models/question-group.model';
 
 @Component({
   selector: 'app-fill-form',
@@ -6,10 +9,19 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./fill-form.component.scss']
 })
 export class FillFormComponent implements OnInit {
+  data: Form=new Form();
 
-  constructor() { }
+  constructor() { 
+    this.data.questionGroup1=questionGroup1;
+    this.data.questionGroup2=questionGroup2;
+    this.data.questionGroup3=questionGroup3;
+    this.data.questionGroup4=questionGroup4;
+  }
 
   ngOnInit(): void {
   }
 
+  fillForm(){
+    console.log(this.data);
+  }
 }
