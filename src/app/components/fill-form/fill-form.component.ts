@@ -27,4 +27,8 @@ export class FillFormComponent implements OnInit {
   fillForm(valid: boolean){
     console.log(valid,this.data);
   }
+
+  formChange(){
+    console.log(this.data);
+  }
 }

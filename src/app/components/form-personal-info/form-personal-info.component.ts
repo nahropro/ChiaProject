@@ -1,5 +1,5 @@
 import { PersonalInfo } from './../../models/personal-info.model';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ControlContainer, NgForm } from '@angular/forms';
 
 @Component({
@@ -11,6 +11,7 @@ import { ControlContainer, NgForm } from '@angular/forms';
 export class FormPersonalInfoComponent implements OnInit {
   @Input() data: PersonalInfo=new PersonalInfo();
   @Input() fillFormMode:boolean;
+  @Output() formChange:EventEmitter<null> = new EventEmitter()
 
   constructor() { }
 
