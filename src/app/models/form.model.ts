@@ -8,6 +8,7 @@ export class Form{
     questionGroup2: QuestionGroup;
     questionGroup3: QuestionGroup;
     questionGroup4: QuestionGroup;
+    filled: boolean;
 
     constructor(){
         this.personalInfo=new PersonalInfo();

@@ -1,10 +1,12 @@
 <mat-card *ngIf="editMode || !id">
-    <app-form-personal-info [data]="data"></app-form-personal-info>
+    <form #f="ngForm">
+        <app-form-personal-info [data]="data" [fillFormMode]="false"></app-form-personal-info>
 
-    <div class="col-12">
-        <button mat-mini-fab color="primary" class="add-button" (click)="update()">
-            <mat-icon *ngIf="!id">add</mat-icon>
-            <mat-icon *ngIf="id">edit</mat-icon>
-        </button>
-    </div>
+        <div class="col-12">
+            <button mat-mini-fab color="primary" class="add-button" (click)="update()" [disabled]="f.invalid">
+                <mat-icon *ngIf="!id">add</mat-icon>
+                <mat-icon *ngIf="id">edit</mat-icon>
+            </button>
+        </div>
+    </form>
 </mat-card>

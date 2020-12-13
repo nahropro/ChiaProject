@@ -1,23 +1,27 @@
 <div class="row">
+    <div class="col-lg-4 col-sm">
+        <mat-form-field class="w-100" *ngIf="!fillFormMode">
+            <input type="text" matInput placeholder="ناو" name="fullName" ngModel [(ngModel)]="data.fullName" required>
+        </mat-form-field>
+
+        <p *ngIf="fillFormMode" class="fullname-text text-primary">{{data?.fullName}}</p>
+    </div>
+
     <mat-form-field class="col-lg-4 col-sm">
-        <input type="text" matInput placeholder="ناو" name="fullName" [(ngModel)]="data.fullName" required>
+        <input type="text" matInput placeholder="پلەی زانستی" name="scienceRank" ngModel [(ngModel)]="data.scienceRank" [required]="fillFormMode">
     </mat-form-field>
 
     <mat-form-field class="col-lg-4 col-sm">
-        <input type="text" matInput placeholder="پلەی زانستی" name="scienceRank" [(ngModel)]="data.scienceRank">
+        <input type="text" matInput placeholder="زانكۆ" name="university" ngModel [(ngModel)]="data.university" [required]="fillFormMode">
     </mat-form-field>
 
     <mat-form-field class="col-lg-4 col-sm">
-        <input type="text" matInput placeholder="زانكۆ" name="university" [(ngModel)]="data.university">
-    </mat-form-field>
-
-    <mat-form-field class="col-lg-4 col-sm">
-        <input type="number" matInput placeholder="تەمەن" [(ngModel)]="data.age" name="age">
+        <input type="number" matInput placeholder="تەمەن" ngModel [(ngModel)]="data.age" name="age" [required]="fillFormMode">
     </mat-form-field>
 
     <mat-form-field class="col-lg-4 col-sm">
         <mat-label>ڕەگەز</mat-label>
-        <mat-select [(ngModel)]="data.gender" name="gender">
+        <mat-select [(ngModel)]="data.gender" name="gender" ngModel [required]="fillFormMode">
             <mat-option value="نێر">
                 نێر
             </mat-option>
@@ -29,7 +33,7 @@
 
     <mat-form-field class="col-lg-4 col-sm">
         <mat-label>ئاستی خوێندن</mat-label>
-        <mat-select [(ngModel)]="data.educationLevel" name="educationLevel">
+        <mat-select [(ngModel)]="data.educationLevel" name="educationLevel" ngModel [required]="fillFormMode">
             <mat-option></mat-option>
             <mat-option value="دیپلۆم یان كەمتر">
                 دیپلۆم یان كەمتر
@@ -57,7 +61,7 @@
 
     <mat-form-field class="col-lg-4 col-sm">
         <mat-label>پێشینەی ماوەی كاركردن</mat-label>
-        <mat-select [(ngModel)]="data.jobExperience" name="jobExperience">
+        <mat-select [(ngModel)]="data.jobExperience" name="jobExperience" ngModel [required]="fillFormMode">
             <mat-option value="كەمتر لە 5 ساڵ">
                 كەمتر لە 5 ساڵ
             </mat-option>
@@ -81,7 +85,7 @@
 
     <mat-form-field class="col-lg-4 col-sm">
         <mat-label>جۆری پیشە</mat-label>
-        <mat-select [(ngModel)]="data.jobType" name="jobType">
+        <mat-select [(ngModel)]="data.jobType" name="jobType" ngModel [required]="fillFormMode">
             <mat-option value="ئیداری">
                 ئیداری
             </mat-option>
@@ -99,7 +103,7 @@
 
     <mat-form-field class="col-lg-4 col-sm">
         <mat-label>بەشی پسپۆڕی</mat-label>
-        <mat-select [(ngModel)]="data.experienceType" name="experienceType">
+        <mat-select [(ngModel)]="data.experienceType" name="experienceType" ngModel [required]="fillFormMode">
             <mat-option value="پەروەردەی وەرزش">
                پەروەردەی وەرزش
             </mat-option>

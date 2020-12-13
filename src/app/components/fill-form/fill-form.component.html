@@ -1,4 +1,4 @@
-<div class="form-page">
+<div class="form-page" *ngIf="data">
     <div class="form-text text-center">
         <h1 class="text-primary">بەناوی خودا</h1>
 
@@ -16,7 +16,14 @@
             <mat-icon>article</mat-icon>
         </button>
         
-        <!-- <app-create-form [data]="data.personalInfo"></app-create-form> -->
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>زانیاری كەسی</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <app-form-personal-info [data]="data.personalInfo" [fillFormMode]="true"></app-form-personal-info>
+            </mat-card-content>
+        </mat-card>
          
         <div class="margin-top">
             <app-form-question-group [data]="data.questionGroup1"></app-form-question-group>
