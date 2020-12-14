@@ -23,6 +23,7 @@ import { ClipboardModule } from '@angular/cdk/clipboard';
 import { FormQuestionGroupComponent } from './components/form-question-group/form-question-group.component';
 import { FormQuestionComponent } from './components/form-question/form-question.component';
 import { FormPersonalInfoComponent } from './components/form-personal-info/form-personal-info.component';
+import { ToastrComponent } from './components/toastr/toastr.component';
 
 
 @NgModule({
@@ -36,7 +37,8 @@ import { FormPersonalInfoComponent } from './components/form-personal-info/form-
     YesNoDialogComponent,
     FormQuestionGroupComponent,
     FormQuestionComponent,
-    FormPersonalInfoComponent
+    FormPersonalInfoComponent,
+    ToastrComponent
   ],
   imports: [
     BrowserModule,

@@ -21,7 +21,7 @@ export class FillFormComponent implements OnInit {
   ngOnInit(): void {
     this.id=this.route.snapshot.paramMap.get('id');
 
-    this.formService.get(this.id).pipe(take(1)).subscribe(d=> {this.data=d; console.log(d);});
+    this.formService.get(this.id).pipe(take(1)).subscribe(d=> this.data=d);
   }
 
   sendForm(valid: boolean){
@@ -29,12 +29,12 @@ export class FillFormComponent implements OnInit {
   }
 
   saveForm(){
-    // this.formService.update(this.id,this.data)
-    //   .then(d=>{
-    //     console.log('Success');
-    //   })
-    //   .catch(err=> {
-    //     console.error('Fail');
-    //   });
+    this.formService.update(this.id,this.data)
+      .then(d=>{
+        console.log('Success');
+      })
+      .catch(err=> {
+        console.error('Fail');
+      });
   }
 }
