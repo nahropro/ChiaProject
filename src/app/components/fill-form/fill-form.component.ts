@@ -5,6 +5,8 @@ import { Component, OnInit } from '@angular/core';
 import { QuestionGroup } from 'src/app/models/question-group.model';
 import { ActivatedRoute } from '@angular/router';
 import { take } from 'rxjs/operators';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { ToastrComponent } from '../toastr/toastr.component';
 
 @Component({
   selector: 'app-fill-form',
@@ -16,7 +18,8 @@ export class FillFormComponent implements OnInit {
   id: string;
 
   constructor(private formService: FormServiceService,
-              private route: ActivatedRoute) {}
+              private route: ActivatedRoute,
+              private snackBar: MatSnackBar) {}
 
   ngOnInit(): void {
     this.id=this.route.snapshot.paramMap.get('id');
@@ -29,12 +32,16 @@ export class FillFormComponent implements OnInit {
   }
 
   saveForm(){
-    this.formService.update(this.id,this.data)
-      .then(d=>{
-        console.log('Success');
-      })
-      .catch(err=> {
-        console.error('Fail');
-      });
+    // this.formService.update(this.id,this.data)
+    //   .then(d=>{
+    //     console.log('Success');
+    //   })
+    //   .catch(err=> {
+    //     console.error('Fail');
+    //   });
+
+    this.snackBar.openFromComponent(ToastrComponent, {
+      duration: 5 * 1000,
+    });
   }
 }

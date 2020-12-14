@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ControlContainer, NgForm } from '@angular/forms';
-import { MatSelectChange } from '@angular/material/select';
+import { UUID } from 'angular2-uuid';
 import { Question } from 'src/app/models/question.model';
 
 @Component({
@@ -12,12 +12,13 @@ import { Question } from 'src/app/models/question.model';
 export class FormQuestionComponent implements OnInit {
   @Input() data: Question;
   @Output() formChange:EventEmitter<null> = new EventEmitter()
-  randomName1: string=Math.random().toString();
-  randomName2: string=Math.random().toString();
+  randomName1: string=UUID.UUID();
+  randomName2: string=UUID.UUID();
 
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
   selectionChange(){
