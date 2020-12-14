@@ -1,0 +1,23 @@
+<mat-card>
+    <div *ngIf="data?.questions?.length>0">
+        <table mat-table [dataSource]="data.questions">
+            <ng-container matColumnDef="normalAnswer">
+                <th mat-header-cell *matHeaderCellDef>دۆخی ئارایی (ئەوەی كە ئێستا هەیە)</th>
+                <td mat-cell *matCellDef="let element"> {{element.normalAnswer}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="title">
+                <th mat-header-cell *matHeaderCellDef>{{data.title}}</th>
+                <td mat-cell *matCellDef="let element"> {{element.title}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="wantedAnswer">
+                <th mat-header-cell *matHeaderCellDef>دۆخی خوازراو (ئەوەی كە ئێستا دەبێت هەبێت)</th>
+                <td mat-cell *matCellDef="let element"> {{element.wantedAnswer}} </td>
+            </ng-container>
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+        </table>
+    </div>
+</mat-card>

@@ -1,1 +1,52 @@
-<p>form-view works!</p>
+<div *ngIf="data">
+    <div class="card">
+        <mat-card>
+            <mat-card-header>
+                <mat-card-title>زانیاری كەسی</mat-card-title>
+            </mat-card-header>
+            <mat-card-content>
+                <div class="row">
+                    <div class="col-lg-4 col-sm">
+                        <p><b class="text-primary">ناو: </b>{{data?.personalInfo?.fullName}}</p>
+                    </div>
+                    <div class="col-lg-4 col-sm">
+                        <p><b class="text-primary">پلەی زانستی: </b>{{data?.personalInfo?.scienceRank}}</p>
+                    </div>
+                    <div class="col-lg-4 col-sm">
+                        <p><b class="text-primary">زانكۆ: </b>{{data?.personalInfo?.university}}</p>
+                    </div>
+                    <div class="col-lg-4 col-sm">
+                        <p><b class="text-primary">تەمەن: </b>{{data?.personalInfo?.age}}</p>
+                    </div>
+                    <div class="col-lg-4 col-sm">
+                        <p><b class="text-primary">ڕەگەز: </b>{{data?.personalInfo?.gender}}</p>
+                    </div>
+                    <div class="col-lg-4 col-sm">
+                        <p><b class="text-primary">ئاستی خوێندن: </b>{{data?.personalInfo?.educationLevel}}</p>
+                    </div>
+                    <div class="col-lg-4 col-sm">
+                        <p><b class="text-primary">پێشینەی ماوەی كاركردن: </b>{{data?.personalInfo?.jobExperience}}</p>
+                    </div>
+                    <div class="col-lg-4 col-sm">
+                        <p><b class="text-primary">جۆری پیشە: </b>{{data?.personalInfo?.jobType}}</p>
+                    </div>
+                    <div class="col-lg-4 col-sm">
+                        <p><b class="text-primary">بەشی پسپۆڕی: </b>{{data?.personalInfo?.experienceType}}</p>
+                    </div>
+                </div>
+            </mat-card-content>
+        </mat-card>
+    </div>
+    <div class="card">
+        <app-question-group-view [data]="data.questionGroup1"></app-question-group-view>
+    </div>
+    <div class="card">
+        <app-question-group-view [data]="data.questionGroup2"></app-question-group-view>
+    </div>
+    <div class="card">
+        <app-question-group-view [data]="data.questionGroup3"></app-question-group-view>
+    </div>
+    <div class="card">
+        <app-question-group-view [data]="data.questionGroup4"></app-question-group-view>
+    </div>
+</div>

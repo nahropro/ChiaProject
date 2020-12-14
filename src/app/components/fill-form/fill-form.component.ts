@@ -19,8 +19,8 @@ export class FillFormComponent implements OnInit {
   formFilled: boolean=false;
 
   constructor(private formService: FormServiceService,
-    private route: ActivatedRoute,
-    private snackBar: MatSnackBar) { }
+              private route: ActivatedRoute,
+              private snackBar: MatSnackBar) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');
