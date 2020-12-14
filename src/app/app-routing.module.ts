@@ -1,3 +1,4 @@
+import { FormViewComponent } from './components/form-view/form-view.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CreateFormComponent } from './components/create-form/create-form.component';
@@ -12,8 +13,9 @@ const routes: Routes = [
   {path: 'login', component: LoginComponent},
 
   {path: 'form/update/:id', component: CreateFormComponent, canActivate: [AuthGuardService]},
-  {path: 'form/create', component: CreateFormComponent, canActivate: [AuthGuardService]},
   {path: 'form/fill/:id', component: FillFormComponent},
+  {path: 'form/view/:id', component: FormViewComponent},
+  {path: 'form/create', component: CreateFormComponent, canActivate: [AuthGuardService]},
   {path: 'form', component: ListFormComponent, canActivate: [AuthGuardService]},
 
   {path: '**', component: LoginComponent}
