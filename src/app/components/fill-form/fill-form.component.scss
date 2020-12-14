@@ -1,29 +1,58 @@
-.add-button-top{
-    transform: translate(-50%, 50%);
-    z-index: 1000;
-    margin-left: 25px;
+.add-button-top {
+  transform: translate(-50%, 50%);
+  z-index: 1000;
+  margin-left: 25px;
 }
 
-.add-button-bottom{
-    transform: translate(-50%, -50%);
-    z-index: 1000;
-    margin-left: 25px;
+.add-button-bottom {
+  transform: translate(-50%, -50%);
+  z-index: 1000;
+  margin-left: 25px;
 }
 
-.margin-top{
-    margin-top: 15px;
+.margin-top {
+  margin-top: 15px;
 }
 
-.form-page{
-    padding: 30px;
-    // background-color: #f5f5f5;
-    background: lightgoldenrodyellow;
-    border-radius: 10px;
+.form-page {
+  padding: 30px;
+  // background-color: #f5f5f5;
+  background: lightgoldenrodyellow;
+  border-radius: 10px;
 }
 
-.form-text p{
-    font-size: large;
-    text-align: justify;
-    text-justify: inter-word;
-    line-height: 1.6;
+.form-text p {
+  font-size: large;
+  text-align: justify;
+  text-justify: inter-word;
+  line-height: 1.6;
+}
+
+::ng-deep snack-bar-container.snack-bar-success {
+  background: green;
+  font-size: large;
+}
+
+::ng-deep snack-bar-container.snack-bar-error {
+  background: red;
+  font-size: large;
+}
+
+.message-form-sent-success{
+  background-color: green;
+}
+
+.message-form-filled{
+  background-color: orange;
+}
+
+.message{
+  border-radius: 15px;
+  height: 50;
+  padding: 10px;
+  font-size: large;
+  text-align: justify;
+  text-justify: inter-word;
+  line-height: 200%;
+  vertical-align: middle;
 }

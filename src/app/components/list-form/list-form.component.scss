@@ -1,30 +1,30 @@
-.add-button{
-    transform: translate(-50%, 50%);
-    z-index: 1000;
+.add-button {
+  transform: translate(-50%, 50%);
+  z-index: 1000;
 }
 
-mat-list-item{
-    margin-bottom: 10px;
-    margin-top: 25px;
+mat-list-item {
+  margin-bottom: 10px;
+  margin-top: 25px;
 }
 
-.name-div{
-    vertical-align: middle;
-    line-height: 200%;
+.name-div {
+  vertical-align: middle;
+  line-height: 200%;
 }
 
-.row{
-    width: 100%;
+.row {
+  width: 100%;
 }
 
 mat-label {
-    color: #424242;
+  color: #424242;
 }
 
 .mat-input-element {
-    color: #424242;
+  color: #424242;
 }
 
 .mat-input-element::placeholder {
-    color: #424242;
+  color: #424242;
 }

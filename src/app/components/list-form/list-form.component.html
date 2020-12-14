@@ -1,23 +1,50 @@
-<mat-form-field class="row" appearance="fill">
-    <mat-label>گەڕان</mat-label>
-    <input type="text" matInput placeholder="گەڕان" name="filterText" [(ngModel)]="filterText" (keyup)="filter()" (change)="filter()">
-    <mat-icon matSuffix>search</mat-icon>
-</mat-form-field>
+<mat-card>
+    <div class="row">
+        <div class="col-md-9">
+            <mat-form-field class="w-100" appearance="fill">
+                <mat-label>گەڕان</mat-label>
+                <input type="text" matInput placeholder="گەڕان" name="filterText" [(ngModel)]="filterText" (keyup)="filter()" (change)="filter()">
+                <mat-icon matSuffix>search</mat-icon>
+            </mat-form-field>
+        </div>
+        <div class="col-md-3">
+            <mat-form-field class="w-100">
+                <mat-label></mat-label>
+                <mat-select [(value)]="filterFillMode" (selectionChange)="filter()">
+                    <mat-option value="all">
+                        هەموو
+                    </mat-option>
+                    <mat-option value="true">
+                        فۆرمی پڕكراوە
+                    </mat-option>
+                    <mat-option value="false">
+                        فۆرمی پڕنەكراوە
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+    </div>
+</mat-card>
 
 <button mat-mini-fab color="primary" aria-label="Example icon button with a delete icon" routerLink="/form/create"
     class="add-button">
     <mat-icon>add</mat-icon>
 </button>
 
-<mat-card *ngIf="filterForms">
+<mat-card *ngIf="filterForms?.length>0">
     <mat-list>
         <ng-container *ngFor="let form of filterForms; let lastItem = last;">
             <mat-list-item>
                 <div class="row">
                     <div class="col name-div">
+                        <mat-checkbox [checked]="form.filled" [disabled]="true"></mat-checkbox>
                         {{form.personalInfo.fullName}}
                     </div>
                     <div class="col-auto">
+                        <button mat-button color="accent" title="كردنەوە" *ngIf="form.filled" (click)="openForm(form.id)">
+                            <mat-icon>folder_open</mat-icon>
+                        </button>
+
                         <button mat-button color="accent" title="زیاتر">
                             <mat-icon>web_asset</mat-icon>
                         </button>

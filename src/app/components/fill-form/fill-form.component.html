@@ -1,4 +1,16 @@
-<div class="form-page" *ngIf="data">
+<div class="message message-form-sent-success" *ngIf="formSent">
+    <p>
+        بەسەركەوتوویی فۆرمەكە نێردرا
+    </p>
+</div>
+
+<div class="message message-form-filled" *ngIf="formFilled">
+    <p>
+        ببورە ئەم فۆرمە پڕكراوەتەوە و نێردراوە، ئەگەر كێشەیەكتان هەیە لە پڕكردنەوەی دەتوانن پەیوەندی بە خاوەنی ڕاپرسیەكەوە بكەن.
+    </p>
+</div>
+
+<div class="form-page" *ngIf="data && !formSent && !formFilled">
     <div class="form-text text-center">
         <h1 class="text-primary">بەناوی خودا</h1>
 

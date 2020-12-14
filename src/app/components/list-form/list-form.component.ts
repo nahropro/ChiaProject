@@ -17,6 +17,7 @@ export class ListFormComponent implements OnInit, OnDestroy {
   forms: Form[];
   filterForms: Form[];
   filterText: string='';
+  filterFillMode: string='all';
 
   constructor(private formService: FormServiceService,
               private dialog: MatDialog,
@@ -27,6 +28,10 @@ export class ListFormComponent implements OnInit, OnDestroy {
       this.forms=f;
       this.filter();
     });
+  }
+
+  test(){
+    console.log(this.filterFillMode);
   }
 
   delete(id: string){
@@ -53,12 +58,12 @@ export class ListFormComponent implements OnInit, OnDestroy {
   filter(){
     const pureFilterText=this.filterText.trim();
 
-    if(pureFilterText){
-      this.filterForms=this.forms.filter(d=> d.personalInfo.fullName.includes(pureFilterText));
-    }
-    else {
-      this.filterForms=this.forms;
-    }
+    this.filterForms=this.forms.filter(d=> 
+      (d.personalInfo.fullName.includes(pureFilterText) && (this.filterFillMode!='all'? d.filled==(this.filterFillMode?.toLowerCase()=='true'):true)));
+  }
+
+  openForm(id: string){
+    this.formService.open(id);
   }
 
   ngOnDestroy(): void {

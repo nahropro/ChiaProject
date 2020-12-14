@@ -48,6 +48,15 @@ export class FormServiceService {
     return this.db.collection('forms').doc(id).update(form);
   }
 
+  send(id: string, form: Form){
+    form.filled=true;
+    return this.db.collection('forms').doc(id).update(form);
+  }
+
+  open(id: string){
+    return this.db.collection('forms').doc(id).update({filled: false});
+  }
+  
   delete(id: string){
     return this.db.collection('forms').doc(id).delete();
   }
