@@ -11,7 +11,7 @@ export class AccountService {
 
   userIsAdmin(id: string): Promise<boolean>{
     return this.db.collection('users').doc(id).get().pipe(take(1)).toPromise().then(d=> {
-      return d.data()['role']==='admin';
+      return d.data()['isAdmin']===true;
     }).catch(err=> {
       return false;
     });

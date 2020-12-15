@@ -30,10 +30,6 @@ export class ListFormComponent implements OnInit, OnDestroy {
     });
   }
 
-  test(){
-    console.log(this.filterFillMode);
-  }
-
   delete(id: string){
     const dialogData: DialogData={
       title:'سڕینەوە',

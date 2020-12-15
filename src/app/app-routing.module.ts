@@ -14,7 +14,7 @@ const routes: Routes = [
 
   {path: 'form/update/:id', component: CreateFormComponent, canActivate: [AuthGuardService]},
   {path: 'form/fill/:id', component: FillFormComponent},
-  {path: 'form/view/:id', component: FormViewComponent},
+  {path: 'form/view/:id', component: FormViewComponent, canActivate: [AuthGuardService]},
   {path: 'form/create', component: CreateFormComponent, canActivate: [AuthGuardService]},
   {path: 'form', component: ListFormComponent, canActivate: [AuthGuardService]},
 

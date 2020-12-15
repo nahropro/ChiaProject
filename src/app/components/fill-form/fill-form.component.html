@@ -6,7 +6,8 @@
 
 <div class="message message-form-filled" *ngIf="formFilled">
     <p>
-        ببورە ئەم فۆرمە پڕكراوەتەوە و نێردراوە، ئەگەر كێشەیەكتان هەیە لە پڕكردنەوەی دەتوانن پەیوەندی بە خاوەنی ڕاپرسیەكەوە بكەن.
+        ببورە ئەم فۆرمە پڕكراوەتەوە و نێردراوە، ئەگەر كێشەیەكتان هەیە لە پڕكردنەوەی دەتوانن پەیوەندی بە خاوەنی
+        ڕاپرسیەكەوە بكەن.
     </p>
 </div>
 
@@ -32,7 +33,8 @@
                     <p>پێویستە هەموو زانیارییەكان پڕبكرێتەوە.</p>
                 </li>
                 <li>
-                    <p>هەموو زانیارییەكان بە شێوەیەكی خودكاری تۆمار دەبێت، بەڵام بۆ تەواوكردن و ناردنی پێویستە هەموو زانیاریییەكان پڕبكەیتەوە و پاشان كلیك لەسەر ناردن بكەیت.</p>
+                    <p>هەموو زانیارییەكان بە شێوەیەكی خودكاری تۆمار دەبێت، بەڵام بۆ تەواوكردن و ناردنی پێویستە هەموو
+                        زانیاریییەكان پڕبكەیتەوە و پاشان كلیك لەسەر ناردن بكەیت.</p>
                 </li>
                 <li>
                     <p>پاش ناردنی فۆرمەكە دووبارە ناتواندرێت دەسكاری بكرێت.</p>
@@ -46,7 +48,8 @@
             <mat-icon>send</mat-icon>
         </button>
 
-        <button mat-mini-fab color="primary" type="button" (click)="saveForm()" title="تۆماركردن" class="add-button-top">
+        <button mat-mini-fab color="primary" type="button" (click)="saveForm()" title="تۆماركردن"
+            class="add-button-top">
             <mat-icon>save</mat-icon>
         </button>
 
@@ -76,11 +79,13 @@
             <app-form-question-group [(data)]="data.questionGroup4" (formChange)="saveForm()"></app-form-question-group>
         </div>
 
-        <button mat-mini-fab color="primary" type="submit" class="add-button-bottom" title="ناردن" [disabled]="f.invalid">
+        <button mat-mini-fab color="primary" type="submit" class="add-button-bottom" title="ناردن"
+            [disabled]="f.invalid">
             <mat-icon>send</mat-icon>
         </button>
 
-        <button mat-mini-fab color="primary" type="button" (click)="saveForm()" title="تۆماركردن" class="add-button-bottom">
+        <button mat-mini-fab color="primary" type="button" (click)="saveForm()" title="تۆماركردن"
+            class="add-button-bottom">
             <mat-icon>save</mat-icon>
         </button>
     </form>
