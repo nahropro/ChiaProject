@@ -1,7 +1,10 @@
 <mat-toolbar color="primary" class="navbar">
     <div class="container">
-        <button *ngIf="currentUser" mat-icon-button class="icon home-icon" routerLink="/form">
+        <button *ngIf="currentUser" mat-icon-button class="icon home-icon" routerLink="/form" title="فۆرمەكان">
             <mat-icon>home</mat-icon>
+        </button>
+        <button *ngIf="currentUser" mat-icon-button class="icon home-icon" routerLink="/statistics" title="ئامار">
+            <mat-icon>text_snippet</mat-icon>
         </button>
         
         <span class="spacer"></span>
