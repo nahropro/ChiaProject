@@ -16,9 +16,6 @@ export class FormServiceService {
   constructor(private db: AngularFirestore) { }
 
   create(personalInfo: PersonalInfo){
-    // let form: Form={
-    //   personalInfo:{...personalInfo}
-    // } as Form;
     const form:Form=new Form();
 
     form.personalInfo=personalInfo;
