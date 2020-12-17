@@ -1,15 +1,11 @@
-import { StatisticsQuestionGroup } from './../../models/statistics-question-group.model';
-import { StatisticsQuestion } from './../../models/statistics-question.model';
-import { StatisticsCount } from './../../models/statistics-count.model';
-import { map } from 'rxjs/operators';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Form } from 'src/app/models/form.model';
-import { FormServiceService } from 'src/app/services/form-service.service';
-import * as _ from 'lodash';
-import { QuestionGroup } from 'src/app/models/question-group.model';
 import { Question } from 'src/app/models/question.model';
-import { KeyObject } from 'crypto';
+import { FormServiceService } from 'src/app/services/form-service.service';
+import { StatisticsCount } from './../../models/statistics-count.model';
+import { StatisticsQuestionGroup } from './../../models/statistics-question-group.model';
+import { StatisticsQuestion } from './../../models/statistics-question.model';
 
 @Component({
   selector: 'app-statistics',
