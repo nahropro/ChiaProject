@@ -26,6 +26,7 @@ import { FormPersonalInfoComponent } from './components/form-personal-info/form-
 import { FormViewComponent } from './components/form-view/form-view.component';
 import { QuestionGroupViewComponent } from './components/question-group-view/question-group-view.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
+import { StatisticsQuestionGroupViewComponent } from './components/statistics-question-group-view/statistics-question-group-view.component';
 
 
 @NgModule({
@@ -42,7 +43,8 @@ import { StatisticsComponent } from './components/statistics/statistics.componen
     FormPersonalInfoComponent,
     FormViewComponent,
     QuestionGroupViewComponent,
-    StatisticsComponent
+    StatisticsComponent,
+    StatisticsQuestionGroupViewComponent
   ],
   imports: [
     BrowserModule,

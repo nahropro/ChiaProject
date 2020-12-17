@@ -1,0 +1,39 @@
+<mat-card *ngIf="data">
+    <table class="table table-strriped table-bordered">
+        <thead>
+            <tr>
+                <th colspan="5">دۆخی ئارایی (ئەوەی كە ئێستا هەیە)</th>
+                <th rowspan="2">{{data.title}}</th>
+                <th colspan="5">دۆخی خوازراو (ئەوەی كە ئێستا دەبێت هەبێت)</th>
+            </tr>
+            <tr>
+                <th>زۆر زۆر</th>
+                <th>زۆر</th>
+                <th>مامناوەند</th>
+                <th>كەم</th>
+                <th>زۆر كەم</th>
+                <th>زۆر زۆر</th>
+                <th>زۆر</th>
+                <th>مامناوەند</th>
+                <th>كەم</th>
+                <th>زۆر كەم</th>
+            </tr>
+        </thead>
+
+        <tbody>
+            <tr *ngFor="let q of data.statisticsQuestions">
+                <td>{{getQuestionAnswerCount(q.noramlAnswers,'زۆر زۆر')}}</td>
+                <td>{{getQuestionAnswerCount(q.noramlAnswers,'زۆر')}}</td>
+                <td>{{getQuestionAnswerCount(q.noramlAnswers,'مامناوەند')}}</td>
+                <td>{{getQuestionAnswerCount(q.noramlAnswers,'كەم')}}</td>
+                <td>{{getQuestionAnswerCount(q.noramlAnswers,'زۆر كەم')}}</td>
+                <td><p>{{q.title}}</p></td>
+                <td>{{getQuestionAnswerCount(q.wantedAnswers,'زۆر زۆر')}}</td>
+                <td>{{getQuestionAnswerCount(q.wantedAnswers,'زۆر')}}</td>
+                <td>{{getQuestionAnswerCount(q.wantedAnswers,'مامناوەند')}}</td>
+                <td>{{getQuestionAnswerCount(q.wantedAnswers,'كەم')}}</td>
+                <td>{{getQuestionAnswerCount(q.wantedAnswers,'زۆر كەم')}}</td>
+            </tr>
+        </tbody>
+    </table>
+</mat-card>
