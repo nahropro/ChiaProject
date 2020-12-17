@@ -77,12 +77,6 @@ export class StatisticsComponent implements OnInit, OnDestroy {
     this.statisticQuestionGroup2=this.generateStatisticQuestionGroup(questions2,this.forms[0]?.questionGroup2.title);
     this.statisticQuestionGroup3=this.generateStatisticQuestionGroup(questions3,this.forms[0]?.questionGroup3.title);
     this.statisticQuestionGroup4=this.generateStatisticQuestionGroup(questions4,this.forms[0]?.questionGroup4.title);
-
-
-    console.log(this.statisticQuestionGroup1);
-    console.log(this.statisticQuestionGroup2);
-    console.log(this.statisticQuestionGroup3);
-    console.log(this.statisticQuestionGroup4);
   }
 
   ngOnDestroy(): void {
