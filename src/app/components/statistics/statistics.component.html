@@ -1,23 +1,25 @@
-<button mat-icon-button color="primary" type="button" class="add-button-top" (click)="exportToExcel()" title="كردنی بە ئێكسڵ">
-    <img src="assets/excel.png">
-</button>
-
-<button mat-icon-button color="primary" type="button"  title="كردنی بە ۆرد" (click)="exportToWord()" class="add-button-top">
-    <img src="assets/word.png" alt="">
-</button>
-
-<div class="margin-bottom"> 
-    <app-statistics-question-group-view [data]="statisticQuestionGroup1"></app-statistics-question-group-view>
-</div>
-
-<div class="margin-bottom">
-    <app-statistics-question-group-view [data]="statisticQuestionGroup2"></app-statistics-question-group-view>
-</div>
-
-<div class="margin-bottom">
-    <app-statistics-question-group-view [data]="statisticQuestionGroup3"></app-statistics-question-group-view>
-</div>
-
-<div>
-    <app-statistics-question-group-view [data]="statisticQuestionGroup4"></app-statistics-question-group-view>
+<div *ngIf="forms">
+    <button mat-icon-button color="primary" type="button" class="add-button-top" (click)="exportToExcel()" title="كردنی بە ئێكسڵ">
+        <img src="assets/excel.png">
+    </button>
+    
+    <!-- <button mat-icon-button color="primary" type="button"  title="كردنی بە ۆرد" (click)="exportToWord()" class="add-button-top">
+        <img src="assets/word.png" alt="">
+    </button> -->
+    
+    <div class="margin-bottom"> 
+        <app-statistics-question-group-view [data]="statisticQuestionGroup1"></app-statistics-question-group-view>
+    </div>
+    
+    <div class="margin-bottom">
+        <app-statistics-question-group-view [data]="statisticQuestionGroup2"></app-statistics-question-group-view>
+    </div>
+    
+    <div class="margin-bottom">
+        <app-statistics-question-group-view [data]="statisticQuestionGroup3"></app-statistics-question-group-view>
+    </div>
+    
+    <div>
+        <app-statistics-question-group-view [data]="statisticQuestionGroup4"></app-statistics-question-group-view>
+    </div>
 </div>

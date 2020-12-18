@@ -6,7 +6,7 @@ import { FormServiceService } from 'src/app/services/form-service.service';
 import { StatisticsCount } from './../../models/statistics-count.model';
 import { StatisticsQuestionGroup } from './../../models/statistics-question-group.model';
 import { StatisticsQuestion } from './../../models/statistics-question.model';
-import { Column, Workbook, WorkbookView } from 'exceljs';
+import { Column, Style, Workbook, WorkbookView, Worksheet } from 'exceljs';
 import * as fs from 'file-saver';
 
 @Component({
@@ -21,18 +21,6 @@ export class StatisticsComponent implements OnInit, OnDestroy {
   statisticQuestionGroup2: StatisticsQuestionGroup;
   statisticQuestionGroup3: StatisticsQuestionGroup;
   statisticQuestionGroup4: StatisticsQuestionGroup;
-
-  title = 'excelJs Example in Angular';
-
-
-  data: product[] = [
-    { id: 1, name: "Nivia Graffiti Basketball", brand: "Nivia", color: "Mixed", price: 391.00 },
-    { id: 2, name: "Strauss Official Basketball", brand: "Strauss", color: "Orange", price: 391.00 },
-    { id: 3, name: "Spalding Rebound Rubber Basketball", brand: "Spalding", color: "Brick", price: 675.00 },
-    { id: 4, name: "Cosco Funtime Basket Ball, Size 6 ", brand: "Cosco", color: "Orange", price: 300.00 },
-    { id: 5, name: "Nike Dominate 8P Basketball", brand: "Nike", color: "brick", price: 1295 },
-    { id: 6, name: "Nivia Europa Basketball", brand: "Nivia", color: "Orange", price: 280.00 }
-  ]
 
   constructor(private formService: FormServiceService) { }
 
@@ -101,19 +89,79 @@ export class StatisticsComponent implements OnInit, OnDestroy {
     let workbook = new Workbook();
     let worksheet = workbook.addWorksheet('sheet');
 
-    worksheet.views=[{rightToLeft:true}];
+    const stattisticsQuestionGroupes: StatisticsQuestionGroup[] = [
+      this.statisticQuestionGroup1,
+      this.statisticQuestionGroup2,
+      this.statisticQuestionGroup3,
+      this.statisticQuestionGroup4
+    ]
 
-    worksheet.columns = [
-      { header: 'Id', key: 'id', width: 10 },
-      { header: 'Name', key: 'name', width: 32 },
-      { header: 'Brand', key: 'brand', width: 10 },
-      { header: 'Color', key: 'color', width: 10 },
-      { header: 'Price', key: 'price', width: 10, style: { font: { name: 'Arial Black', size: 10 } } },
-    ] as Column[];
+    worksheet.views = [{ rightToLeft: true }];
 
-    this.data.forEach(e => {
-      worksheet.addRow({ id: e.id, name: e.name, brand: e.brand, color: e.color, price: e.price }, "n");
+    stattisticsQuestionGroupes.forEach((v, i) => {
+      const index: number = (v.statisticsQuestions.length + 1 + 3) * i;
+
+      //Set style for heders
+      this.excelStyleRange(worksheet, index + 1, 1, index + 2, 11, {
+        font: { bold: true },
+        alignment: {
+          vertical: 'middle',
+          horizontal: 'center'
+        },
+        fill: {
+          type: 'pattern',
+          pattern: 'solid',
+          fgColor: { argb: '95B3D7' }
+        }
+      });
+
+      //set border for question groups
+      this.excelStyleRange(worksheet,index+1,1,index+2+v.statisticsQuestions.length,11,{
+        border:{
+          top:{style:'thin'},
+          left:{style:'thin'},
+          bottom:{style:'thin'},
+          right:{style:'thin'},
+        }
+      });
+
+      worksheet.mergeCells(index + 1, 1, index + 1, 5);
+      worksheet.getCell(index + 1, 1).value = 'دۆخی ئارایی (ئەوەی كە ئێستا هەیە)';
+
+      worksheet.mergeCells(index + 1, 7, index + 1, 11);
+      worksheet.getCell(index + 1, 7).value = 'دۆخی خوازراو (ئەوەی كە ئێستا دەبێت هەبێت)';
+
+      worksheet.getCell(index + 2, 1).value = 'زۆر زۆر';
+      worksheet.getCell(index + 2, 2).value = 'زۆر';
+      worksheet.getCell(index + 2, 3).value = 'مامناوەند';
+      worksheet.getCell(index + 2, 4).value = 'كەم';
+      worksheet.getCell(index + 2, 5).value = 'زۆر كەم';
+
+      worksheet.mergeCells(index + 1, 6, index + 2, 6);
+      worksheet.getCell(index + 1, 6).value = v.title;
+
+      worksheet.getCell(index + 2, 7).value = 'زۆر زۆر';
+      worksheet.getCell(index + 2, 8).value = 'زۆر';
+      worksheet.getCell(index + 2, 9).value = 'مامناوەند';
+      worksheet.getCell(index + 2, 10).value = 'كەم';
+      worksheet.getCell(index + 2, 11).value = 'زۆر كەم';
+
+      v.statisticsQuestions.forEach((qv, qi) => {
+        worksheet.getCell(index + 3 + qi, 1).value = this.getQuestionAnswerCount(qv.noramlAnswers, 'زۆر زۆر');
+        worksheet.getCell(index + 3 + qi, 2).value = this.getQuestionAnswerCount(qv.noramlAnswers, 'زۆر');
+        worksheet.getCell(index + 3 + qi, 3).value = this.getQuestionAnswerCount(qv.noramlAnswers, 'مامناوەند');
+        worksheet.getCell(index + 3 + qi, 4).value = this.getQuestionAnswerCount(qv.noramlAnswers, 'كەم');
+        worksheet.getCell(index + 3 + qi, 5).value = this.getQuestionAnswerCount(qv.noramlAnswers, 'زۆر كەم');
+        worksheet.getCell(index + 3 + qi, 6).value = qv.title;
+        worksheet.getCell(index + 3 + qi, 7).value = this.getQuestionAnswerCount(qv.wantedAnswers, 'زۆر زۆر');
+        worksheet.getCell(index + 3 + qi, 8).value = this.getQuestionAnswerCount(qv.wantedAnswers, 'زۆر');
+        worksheet.getCell(index + 3 + qi, 9).value = this.getQuestionAnswerCount(qv.wantedAnswers, 'مامناوەند');
+        worksheet.getCell(index + 3 + qi, 10).value = this.getQuestionAnswerCount(qv.wantedAnswers, 'كەم');
+        worksheet.getCell(index + 3 + qi, 11).value = this.getQuestionAnswerCount(qv.wantedAnswers, 'زۆر كەم');
+      });
     });
+
+    worksheet.getColumn(6).width = 60;
 
     workbook.xlsx.writeBuffer().then((data) => {
       let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
@@ -121,16 +169,19 @@ export class StatisticsComponent implements OnInit, OnDestroy {
     })
   }
 
+  excelStyleRange(ws: Worksheet, top: number, left: number, bottom: number, right: number, style: Partial<Style>) {
+    for (let i = top; i <= bottom; i++) {
+      for (let j = left; j <= right; j++) {
+        ws.getCell(i, j).style = Object.assign(ws.getCell(i, j).style,style);
+      }
+    }
+  }
+
   exportToWord() {
     console.log('Exporting to word...')
   }
-}
 
-
-export interface product {
-  id: number
-  name: string
-  brand: string
-  color: string
-  price: number
+  getQuestionAnswerCount(data: StatisticsCount[], answer: string): number {
+    return data?.find(d => d.title == answer)?.count || 0;
+  }
 }
