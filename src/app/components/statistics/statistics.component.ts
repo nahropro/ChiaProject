@@ -6,7 +6,8 @@ import { FormServiceService } from 'src/app/services/form-service.service';
 import { StatisticsCount } from './../../models/statistics-count.model';
 import { StatisticsQuestionGroup } from './../../models/statistics-question-group.model';
 import { StatisticsQuestion } from './../../models/statistics-question.model';
-import { Column, Style, Workbook, WorkbookView, Worksheet } from 'exceljs';
+import { ExcelService } from './../../services/excel.service';
+import { Document, Packer, Paragraph, TextRun } from "docx";
 import * as fs from 'file-saver';
 
 @Component({
@@ -22,7 +23,8 @@ export class StatisticsComponent implements OnInit, OnDestroy {
   statisticQuestionGroup3: StatisticsQuestionGroup;
   statisticQuestionGroup4: StatisticsQuestionGroup;
 
-  constructor(private formService: FormServiceService) { }
+  constructor(private formService: FormServiceService,
+    private excelService: ExcelService) { }
 
   ngOnInit(): void {
     this.formSubscription = this.formService.getAll().subscribe(f => {
@@ -86,102 +88,43 @@ export class StatisticsComponent implements OnInit, OnDestroy {
   }
 
   exportToExcel() {
-    let workbook = new Workbook();
-    let worksheet = workbook.addWorksheet('sheet');
-
     const stattisticsQuestionGroupes: StatisticsQuestionGroup[] = [
       this.statisticQuestionGroup1,
       this.statisticQuestionGroup2,
       this.statisticQuestionGroup3,
       this.statisticQuestionGroup4
-    ]
+    ];
 
-    worksheet.views = [{ rightToLeft: true }];
-
-    stattisticsQuestionGroupes.forEach((v, i) => {
-      const index: number = (v.statisticsQuestions.length + 1 + 3) * i;
-
-      //Set style for heders
-      this.excelStyleRange(worksheet, index + 1, 1, index + 2, 11, {
-        font: { bold: true },
-        alignment: {
-          vertical: 'middle',
-          horizontal: 'center'
-        },
-        fill: {
-          type: 'pattern',
-          pattern: 'solid',
-          fgColor: { argb: '95B3D7' }
-        }
-      });
-
-      //set border for question groups
-      this.excelStyleRange(worksheet,index+1,1,index+2+v.statisticsQuestions.length,11,{
-        border:{
-          top:{style:'thin'},
-          left:{style:'thin'},
-          bottom:{style:'thin'},
-          right:{style:'thin'},
-        }
-      });
-
-      worksheet.mergeCells(index + 1, 1, index + 1, 5);
-      worksheet.getCell(index + 1, 1).value = 'دۆخی ئارایی (ئەوەی كە ئێستا هەیە)';
-
-      worksheet.mergeCells(index + 1, 7, index + 1, 11);
-      worksheet.getCell(index + 1, 7).value = 'دۆخی خوازراو (ئەوەی كە ئێستا دەبێت هەبێت)';
-
-      worksheet.getCell(index + 2, 1).value = 'زۆر زۆر';
-      worksheet.getCell(index + 2, 2).value = 'زۆر';
-      worksheet.getCell(index + 2, 3).value = 'مامناوەند';
-      worksheet.getCell(index + 2, 4).value = 'كەم';
-      worksheet.getCell(index + 2, 5).value = 'زۆر كەم';
-
-      worksheet.mergeCells(index + 1, 6, index + 2, 6);
-      worksheet.getCell(index + 1, 6).value = v.title;
-
-      worksheet.getCell(index + 2, 7).value = 'زۆر زۆر';
-      worksheet.getCell(index + 2, 8).value = 'زۆر';
-      worksheet.getCell(index + 2, 9).value = 'مامناوەند';
-      worksheet.getCell(index + 2, 10).value = 'كەم';
-      worksheet.getCell(index + 2, 11).value = 'زۆر كەم';
-
-      v.statisticsQuestions.forEach((qv, qi) => {
-        worksheet.getCell(index + 3 + qi, 1).value = this.getQuestionAnswerCount(qv.noramlAnswers, 'زۆر زۆر');
-        worksheet.getCell(index + 3 + qi, 2).value = this.getQuestionAnswerCount(qv.noramlAnswers, 'زۆر');
-        worksheet.getCell(index + 3 + qi, 3).value = this.getQuestionAnswerCount(qv.noramlAnswers, 'مامناوەند');
-        worksheet.getCell(index + 3 + qi, 4).value = this.getQuestionAnswerCount(qv.noramlAnswers, 'كەم');
-        worksheet.getCell(index + 3 + qi, 5).value = this.getQuestionAnswerCount(qv.noramlAnswers, 'زۆر كەم');
-        worksheet.getCell(index + 3 + qi, 6).value = qv.title;
-        worksheet.getCell(index + 3 + qi, 7).value = this.getQuestionAnswerCount(qv.wantedAnswers, 'زۆر زۆر');
-        worksheet.getCell(index + 3 + qi, 8).value = this.getQuestionAnswerCount(qv.wantedAnswers, 'زۆر');
-        worksheet.getCell(index + 3 + qi, 9).value = this.getQuestionAnswerCount(qv.wantedAnswers, 'مامناوەند');
-        worksheet.getCell(index + 3 + qi, 10).value = this.getQuestionAnswerCount(qv.wantedAnswers, 'كەم');
-        worksheet.getCell(index + 3 + qi, 11).value = this.getQuestionAnswerCount(qv.wantedAnswers, 'زۆر كەم');
-      });
-    });
-
-    worksheet.getColumn(6).width = 60;
-
-    workbook.xlsx.writeBuffer().then((data) => {
-      let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-      fs.saveAs(blob, 'ProductData.xlsx');
-    })
-  }
-
-  excelStyleRange(ws: Worksheet, top: number, left: number, bottom: number, right: number, style: Partial<Style>) {
-    for (let i = top; i <= bottom; i++) {
-      for (let j = left; j <= right; j++) {
-        ws.getCell(i, j).style = Object.assign(ws.getCell(i, j).style,style);
-      }
-    }
+    this.excelService.exportStatistics(stattisticsQuestionGroupes, 'ئەنجام');
   }
 
   exportToWord() {
-    console.log('Exporting to word...')
-  }
+    const doc = new Document();
 
-  getQuestionAnswerCount(data: StatisticsCount[], answer: string): number {
-    return data?.find(d => d.title == answer)?.count || 0;
+    // Documents contain sections, you can have multiple sections per document, go here to learn more about sections
+    // This simple example will only contain one section
+    doc.addSection({
+      properties: {},
+      children: [
+        new Paragraph({
+          children: [
+            new TextRun("Hello World"),
+            new TextRun({
+              text: "Foo Bar",
+              bold: true,
+            }),
+            new TextRun({
+              text: "\tGithub is the best",
+              bold: true,
+            }),
+          ],
+        }),
+      ],
+    });
+
+    // Used to export the file into a .docx file
+    Packer.toBuffer(doc).then((buffer) => {
+      fs.writeFileSync("My Document.docx", buffer);
+    });
   }
 }

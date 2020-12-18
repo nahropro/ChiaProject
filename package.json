@@ -28,6 +28,7 @@
     "bluebird": "^3.7.2",
     "bootstrap": "^4.5.3",
     "commonjs": "0.0.1",
+    "docx": "^5.4.1",
     "exceljs": "^4.2.0",
     "file-saver": "^2.0.5",
     "firebase": "^8.1.2",

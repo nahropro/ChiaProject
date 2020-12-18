@@ -1,3 +1,4 @@
+import { ExcelService } from './services/excel.service';
 import { YesNoDialogComponent } from './components/yes-no-dialog/yes-no-dialog.component';
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
@@ -61,7 +62,8 @@ import { StatisticsQuestionGroupViewComponent } from './components/statistics-qu
   providers: [
     AuthService,
     FormServiceService,
-    AccountService
+    AccountService,
+    ExcelService
   ],
   bootstrap: [AppComponent]
 })
