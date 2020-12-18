@@ -1,3 +1,4 @@
+import { DocService } from './../../services/doc.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Form } from 'src/app/models/form.model';
@@ -24,7 +25,8 @@ export class StatisticsComponent implements OnInit, OnDestroy {
   statisticQuestionGroup4: StatisticsQuestionGroup;
 
   constructor(private formService: FormServiceService,
-    private excelService: ExcelService) { }
+              private excelService: ExcelService,
+              private docService: DocService) { }
 
   ngOnInit(): void {
     this.formSubscription = this.formService.getAll().subscribe(f => {
@@ -99,32 +101,13 @@ export class StatisticsComponent implements OnInit, OnDestroy {
   }
 
   exportToWord() {
-    const doc = new Document();
+    const stattisticsQuestionGroupes: StatisticsQuestionGroup[] = [
+      this.statisticQuestionGroup1,
+      this.statisticQuestionGroup2,
+      this.statisticQuestionGroup3,
+      this.statisticQuestionGroup4
+    ];
 
-    // Documents contain sections, you can have multiple sections per document, go here to learn more about sections
-    // This simple example will only contain one section
-    doc.addSection({
-      properties: {},
-      children: [
-        new Paragraph({
-          children: [
-            new TextRun("Hello World"),
-            new TextRun({
-              text: "Foo Bar",
-              bold: true,
-            }),
-            new TextRun({
-              text: "\tGithub is the best",
-              bold: true,
-            }),
-          ],
-        }),
-      ],
-    });
-
-    // Used to export the file into a .docx file
-    Packer.toBuffer(doc).then((buffer) => {
-      fs.writeFileSync("My Document.docx", buffer);
-    });
+    this.docService.exportStatistics(stattisticsQuestionGroupes, 'ئەنجام');
   }
 }
