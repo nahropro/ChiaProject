@@ -277,9 +277,7 @@ export class DocService {
 
       tables.push(new Table({ rows: rows }));
     })
-
-    // const table: Table = new Table({ rows: rows });
-
+    
     doc.addSection({
       children: [...tables],
     });
