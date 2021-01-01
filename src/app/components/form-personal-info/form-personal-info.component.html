@@ -8,11 +8,11 @@
     </div>
 
     <mat-form-field class="col-lg-4 col-sm">
-        <input type="text" matInput placeholder="پلەی زانستی" name="scienceRank" ngModel [(ngModel)]="data.scienceRank" (change)="formChange.emit()" [required]="fillFormMode">
+        <input type="text" matInput placeholder="پلەی زانستی" name="scienceRank" ngModel [(ngModel)]="data.scienceRank" (change)="formChange.emit()">
     </mat-form-field>
 
     <mat-form-field class="col-lg-4 col-sm">
-        <input type="text" matInput placeholder="زانكۆ" name="university" ngModel [(ngModel)]="data.university" (change)="formChange.emit()" [required]="fillFormMode">
+        <input type="text" matInput placeholder="زانكۆ" name="university" ngModel [(ngModel)]="data.university" (change)="formChange.emit()">
     </mat-form-field>
 
     <mat-form-field class="col-lg-4 col-sm">
@@ -85,7 +85,7 @@
 
     <mat-form-field class="col-lg-4 col-sm">
         <mat-label>جۆری پیشە</mat-label>
-        <mat-select [(ngModel)]="data.jobType" name="jobType" ngModel (selectionChange)="formChange.emit()" [required]="fillFormMode">
+        <mat-select [(ngModel)]="data.jobType" name="jobType" ngModel (selectionChange)="formChange.emit()">
             <mat-option value="ئیداری">
                 ئیداری
             </mat-option>
