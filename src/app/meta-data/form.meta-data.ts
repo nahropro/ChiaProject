@@ -216,7 +216,7 @@ export const questionGroup3 : QuestionGroup={
 };
 
 export const questionGroup4 : QuestionGroup={
-    title:'پرسە پەیوەندیدارەكان بە خاڵە بەهێزەكانی فووتساڵی شاری كەلار',
+    title:'بژاردە پەیوەستەکان بە کۆسپەکانی بەردەم فوتساڵ لە شاری کەلار.',
     questions:[
         {
             id: 1,

@@ -1,3 +1,4 @@
+import { MigrationService } from './services/migration.service';
 import { DocService } from './services/doc.service';
 import { ExcelService } from './services/excel.service';
 import { YesNoDialogComponent } from './components/yes-no-dialog/yes-no-dialog.component';
@@ -29,6 +30,7 @@ import { FormViewComponent } from './components/form-view/form-view.component';
 import { QuestionGroupViewComponent } from './components/question-group-view/question-group-view.component';
 import { StatisticsComponent } from './components/statistics/statistics.component';
 import { StatisticsQuestionGroupViewComponent } from './components/statistics-question-group-view/statistics-question-group-view.component';
+import { MigrationComponent } from './components/migration/migration.component';
 
 
 @NgModule({
@@ -46,7 +48,8 @@ import { StatisticsQuestionGroupViewComponent } from './components/statistics-qu
     FormViewComponent,
     QuestionGroupViewComponent,
     StatisticsComponent,
-    StatisticsQuestionGroupViewComponent
+    StatisticsQuestionGroupViewComponent,
+    MigrationComponent
   ],
   imports: [
     BrowserModule,
@@ -65,7 +68,8 @@ import { StatisticsQuestionGroupViewComponent } from './components/statistics-qu
     FormServiceService,
     AccountService,
     ExcelService,
-    DocService
+    DocService,
+    MigrationService
   ],
   bootstrap: [AppComponent]
 })

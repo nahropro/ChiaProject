@@ -14,7 +14,7 @@ export class FormViewComponent implements OnInit {
   id: string;
 
   constructor(private formService: FormServiceService,
-              private route: ActivatedRoute,) { }
+              private route: ActivatedRoute) { }
 
   ngOnInit(): void {
     this.id = this.route.snapshot.paramMap.get('id');

@@ -7,6 +7,7 @@ import { FillFormComponent } from './components/fill-form/fill-form.component';
 import { ListFormComponent } from './components/list-form/list-form.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuardService } from './services/auth-guard.service';
+import { MigrationComponent } from './components/migration/migration.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/form', pathMatch:'full'},
@@ -20,6 +21,8 @@ const routes: Routes = [
   {path: 'form', component: ListFormComponent, canActivate: [AuthGuardService]},
 
   {path: 'statistics', component: StatisticsComponent, canActivate: [AuthGuardService]},
+
+  {path: 'migration', component: MigrationComponent, canActivate: [AuthGuardService]},
 
   {path: '**', component: LoginComponent}
 ];

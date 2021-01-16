@@ -1,4 +1,3 @@
-import { DocService } from './../../services/doc.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Form } from 'src/app/models/form.model';
@@ -7,9 +6,8 @@ import { FormServiceService } from 'src/app/services/form-service.service';
 import { StatisticsCount } from './../../models/statistics-count.model';
 import { StatisticsQuestionGroup } from './../../models/statistics-question-group.model';
 import { StatisticsQuestion } from './../../models/statistics-question.model';
+import { DocService } from './../../services/doc.service';
 import { ExcelService } from './../../services/excel.service';
-import { Document, Packer, Paragraph, TextRun } from "docx";
-import * as fs from 'file-saver';
 
 @Component({
   selector: 'app-statistics',
@@ -25,8 +23,8 @@ export class StatisticsComponent implements OnInit, OnDestroy {
   statisticQuestionGroup4: StatisticsQuestionGroup;
 
   constructor(private formService: FormServiceService,
-              private excelService: ExcelService,
-              private docService: DocService) { }
+    private excelService: ExcelService,
+    private docService: DocService) { }
 
   ngOnInit(): void {
     this.formSubscription = this.formService.getAll().subscribe(f => {
