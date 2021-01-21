@@ -31,6 +31,11 @@
     <mat-icon>add</mat-icon>
 </button>
 
+<button mat-mini-fab color="primary" aria-label="Example icon button with a delete icon" class="add-button"
+    (click)="exportFromsToExcel()">
+    <img src="assets/excel.png">
+</button>
+
 <mat-card *ngIf="filterForms?.length>0">
     <mat-list>
         <ng-container *ngFor="let form of filterForms; let lastItem = last;">

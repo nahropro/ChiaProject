@@ -1,3 +1,4 @@
+import { ExcelService } from './../../services/excel.service';
 import { Observable, Subscription } from 'rxjs';
 import { FormServiceService } from './../../services/form-service.service';
 import { Component, OnDestroy, OnInit } from '@angular/core';
@@ -16,53 +17,60 @@ export class ListFormComponent implements OnInit, OnDestroy {
   formSubscription: Subscription;
   forms: Form[];
   filterForms: Form[];
-  filterText: string='';
-  filterFillMode: string='all';
+  filterText: string = '';
+  filterFillMode: string = 'all';
 
   constructor(private formService: FormServiceService,
-              private dialog: MatDialog,
-              private clipboard: Clipboard) { }
+    private dialog: MatDialog,
+    private clipboard: Clipboard,
+    private excelService: ExcelService) { }
 
   ngOnInit(): void {
-    this.formSubscription = this.formService.getAll().subscribe(f=> {
-      this.forms=f;
+    this.formSubscription = this.formService.getAll().subscribe(f => {
+      this.forms = f;
       this.filter();
     });
   }
 
-  delete(id: string){
-    const dialogData: DialogData={
-      title:'سڕینەوە',
-      message:'دڵنیای لە سڕێنەوەی ئەم ئەندامە؟'
+  delete(id: string) {
+    const dialogData: DialogData = {
+      title: 'سڕینەوە',
+      message: 'دڵنیای لە سڕێنەوەی ئەم ئەندامە؟'
     };
 
-    const dialogRef = this.dialog.open(YesNoDialogComponent,{
+    const dialogRef = this.dialog.open(YesNoDialogComponent, {
       data: dialogData
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      if(result){
+      if (result) {
         this.formService.delete(id);
       }
     });
   }
 
-  copyLink(id: string){
+  copyLink(id: string) {
     this.clipboard.copy(window.location.host + '/form/fill/' + id);
   }
 
-  filter(){
-    const pureFilterText=this.filterText.trim();
+  filter() {
+    const pureFilterText = this.filterText.trim();
 
-    this.filterForms=this.forms.filter(d=> 
-      (d.personalInfo.fullName.includes(pureFilterText) && (this.filterFillMode!='all'? d.filled==(this.filterFillMode?.toLowerCase()=='true'):true)));
+    this.filterForms = this.forms.filter(d =>
+      (d.personalInfo.fullName.includes(pureFilterText) && (this.filterFillMode != 'all' ? d.filled == (this.filterFillMode?.toLowerCase() == 'true') : true)));
   }
 
-  openForm(id: string){
+  openForm(id: string) {
     this.formService.open(id);
   }
 
   ngOnDestroy(): void {
     this.formSubscription.unsubscribe();
+  }
+
+  exportFromsToExcel() {
+    const filledForms=[...this.forms.filter(f=> f.filled)];
+
+    this.excelService.exportForms(filledForms,'فۆرمەكان');
   }
 }

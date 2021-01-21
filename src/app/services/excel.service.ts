@@ -1,3 +1,4 @@
+import { Form } from './../models/form.model';
 import { StatisticsQuestionGroup } from './../models/statistics-question-group.model';
 import { Injectable } from '@angular/core';
 import { Style, Workbook, Worksheet } from 'exceljs';
@@ -98,5 +99,17 @@ export class ExcelService {
         ws.getCell(i, j).style = Object.assign(ws.getCell(i, j).style,style);
       }
     }
+  }
+
+  exportForms(forms: Form[], filename: string){
+    let workbook = new Workbook();
+    let worksheet = workbook.addWorksheet('sheet');
+
+    worksheet.views = [{ rightToLeft: true }];
+
+    workbook.xlsx.writeBuffer().then((data) => {
+      let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
+      fs.saveAs(blob, filename+'.xlsx');
+    })
   }
 }

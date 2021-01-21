@@ -1,6 +1,7 @@
 .add-button {
   transform: translate(-50%, 50%);
   z-index: 1000;
+  margin-left: 10px;
 }
 
 mat-list-item {
@@ -27,4 +28,10 @@ mat-label {
 
 .mat-input-element::placeholder {
   color: #424242;
+}
+
+img{
+  width: 75%;
+  height: 75%;
+  margin-top: -10%;
 }
