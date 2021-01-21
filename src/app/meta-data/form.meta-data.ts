@@ -237,7 +237,7 @@ export const questionGroup3: QuestionGroup = {
 
 export const questionGroup4: QuestionGroup = {
     title: 'بژاردە پەیوەستەکان بە کۆسپەکانی بەردەم فوتساڵ لە شاری کەلار.',
-    titlef: '',
+    titlef: 'گزاره های مربوط به نقاط تهدید فوتسال شهرستان کلار',
     questions: [
         {
             id: 1,
