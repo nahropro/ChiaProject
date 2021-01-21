@@ -8,6 +8,7 @@ import { ListFormComponent } from './components/list-form/list-form.component';
 import { LoginComponent } from './components/login/login.component';
 import { AuthGuardService } from './services/auth-guard.service';
 import { MigrationComponent } from './components/migration/migration.component';
+import { BackupComponent } from './components/backup/backup.component';
 
 const routes: Routes = [
   {path: '', redirectTo: '/form', pathMatch:'full'},
@@ -23,6 +24,8 @@ const routes: Routes = [
   {path: 'statistics', component: StatisticsComponent, canActivate: [AuthGuardService]},
 
   {path: 'migration', component: MigrationComponent, canActivate: [AuthGuardService]},
+  
+  {path: 'backup', component: BackupComponent, canActivate: [AuthGuardService]},
 
   {path: '**', component: LoginComponent}
 ];

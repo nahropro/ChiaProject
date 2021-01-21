@@ -86,7 +86,7 @@ export class ExcelService {
     workbook.xlsx.writeBuffer().then((data) => {
       let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
       fs.saveAs(blob, filename+'.xlsx');
-    })
+    });
   }
 
   private getQuestionAnswerCount(data: StatisticsCount[], answer: string): number {

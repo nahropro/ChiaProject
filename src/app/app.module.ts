@@ -1,3 +1,4 @@
+import { BackupService } from './services/backup.service';
 import { MigrationService } from './services/migration.service';
 import { DocService } from './services/doc.service';
 import { ExcelService } from './services/excel.service';
@@ -31,6 +32,7 @@ import { QuestionGroupViewComponent } from './components/question-group-view/que
 import { StatisticsComponent } from './components/statistics/statistics.component';
 import { StatisticsQuestionGroupViewComponent } from './components/statistics-question-group-view/statistics-question-group-view.component';
 import { MigrationComponent } from './components/migration/migration.component';
+import { BackupComponent } from './components/backup/backup.component';
 
 
 @NgModule({
@@ -49,7 +51,8 @@ import { MigrationComponent } from './components/migration/migration.component';
     QuestionGroupViewComponent,
     StatisticsComponent,
     StatisticsQuestionGroupViewComponent,
-    MigrationComponent
+    MigrationComponent,
+    BackupComponent
   ],
   imports: [
     BrowserModule,
@@ -69,7 +72,8 @@ import { MigrationComponent } from './components/migration/migration.component';
     AccountService,
     ExcelService,
     DocService,
-    MigrationService
+    MigrationService,
+    BackupService
   ],
   bootstrap: [AppComponent]
 })
