@@ -52,7 +52,7 @@ export class StatisticsComponent implements OnInit, OnDestroy {
     return r;
   }
 
-  private generateStatisticQuestionGroup(questions: Question[], title: string): StatisticsQuestionGroup {
+  private generateStatisticQuestionGroup(questions: Question[], title: string, titlef: string): StatisticsQuestionGroup {
     let groupedQuestions = this.groupArrayOfObjects(questions, 'id');
     groupedQuestions = groupedQuestions.slice(1, groupedQuestions.length) as [];
 
@@ -60,6 +60,7 @@ export class StatisticsComponent implements OnInit, OnDestroy {
       return {
         id: d[0]['id'],
         title: d[0]['title'] || '',
+        titlef: d[0]['titlef'] || '',
         noramlAnswers: this.myMap(this.groupArrayOfObjects(d, 'normalAnswer')),
         wantedAnswers: this.myMap(this.groupArrayOfObjects(d, 'wantedAnswer'))
       }
@@ -67,6 +68,7 @@ export class StatisticsComponent implements OnInit, OnDestroy {
 
     return {
       title: title,
+      titlef: titlef,
       statisticsQuestions: statisticQuestions
     }
   }
@@ -77,10 +79,10 @@ export class StatisticsComponent implements OnInit, OnDestroy {
     const questions3: Question[] = ([] as Question[]).concat(...this.forms.map(f => f.questionGroup3).map(f => f.questions));
     const questions4: Question[] = ([] as Question[]).concat(...this.forms.map(f => f.questionGroup4).map(f => f.questions));
 
-    this.statisticQuestionGroup1 = this.generateStatisticQuestionGroup(questions1, this.forms[0]?.questionGroup1.title);
-    this.statisticQuestionGroup2 = this.generateStatisticQuestionGroup(questions2, this.forms[0]?.questionGroup2.title);
-    this.statisticQuestionGroup3 = this.generateStatisticQuestionGroup(questions3, this.forms[0]?.questionGroup3.title);
-    this.statisticQuestionGroup4 = this.generateStatisticQuestionGroup(questions4, this.forms[0]?.questionGroup4.title);
+    this.statisticQuestionGroup1 = this.generateStatisticQuestionGroup(questions1, this.forms[0]?.questionGroup1.title, this.forms[0]?.questionGroup1.titlef);
+    this.statisticQuestionGroup2 = this.generateStatisticQuestionGroup(questions2, this.forms[0]?.questionGroup2.title, this.forms[0]?.questionGroup2.titlef);
+    this.statisticQuestionGroup3 = this.generateStatisticQuestionGroup(questions3, this.forms[0]?.questionGroup3.title, this.forms[0]?.questionGroup3.titlef);
+    this.statisticQuestionGroup4 = this.generateStatisticQuestionGroup(questions4, this.forms[0]?.questionGroup4.title, this.forms[0]?.questionGroup4.titlef);
   }
 
   ngOnDestroy(): void {

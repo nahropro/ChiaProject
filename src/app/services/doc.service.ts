@@ -40,7 +40,7 @@ export class DocService {
             children: [new Paragraph({
               bidirectional: true,
               children: [new TextRun({
-                text: statisticsQuestionGroupes[0].title,
+                text: statisticsQuestionGroupes[0].titlef,
                 bold: true,
                 rightToLeft: true,
               })]
@@ -219,7 +219,7 @@ export class DocService {
               children: [new Paragraph({
                 bidirectional: true,
                 children: [new TextRun({
-                  text: d.title,
+                  text: d.titlef,
                   rightToLeft: true
                 })]
               })]

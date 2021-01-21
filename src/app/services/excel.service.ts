@@ -58,7 +58,7 @@ export class ExcelService {
       worksheet.getCell(index + 2, 5).value = 'خیلی کم';
 
       worksheet.mergeCells(index + 1, 6, index + 2, 6);
-      worksheet.getCell(index + 1, 6).value = v.title;
+      worksheet.getCell(index + 1, 6).value = v.titlef;
 
       worksheet.getCell(index + 2, 7).value = 'خیلی زیاد';
       worksheet.getCell(index + 2, 8).value = 'زیاد';
@@ -72,7 +72,7 @@ export class ExcelService {
         worksheet.getCell(index + 3 + qi, 3).value = this.getQuestionAnswerCount(qv.noramlAnswers, 'مامناوەند');
         worksheet.getCell(index + 3 + qi, 4).value = this.getQuestionAnswerCount(qv.noramlAnswers, 'كەم');
         worksheet.getCell(index + 3 + qi, 5).value = this.getQuestionAnswerCount(qv.noramlAnswers, 'زۆر كەم');
-        worksheet.getCell(index + 3 + qi, 6).value = qv.title;
+        worksheet.getCell(index + 3 + qi, 6).value = qv.titlef;
         worksheet.getCell(index + 3 + qi, 7).value = this.getQuestionAnswerCount(qv.wantedAnswers, 'زۆر زۆر');
         worksheet.getCell(index + 3 + qi, 8).value = this.getQuestionAnswerCount(qv.wantedAnswers, 'زۆر');
         worksheet.getCell(index + 3 + qi, 9).value = this.getQuestionAnswerCount(qv.wantedAnswers, 'مامناوەند');
