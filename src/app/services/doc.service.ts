@@ -28,7 +28,7 @@ export class DocService {
             children: [new Paragraph({
               bidirectional: true,
               children: [new TextRun({
-                text: 'دۆخی خوازراو (ئەوەی كە ئێستا دەبێت هەبێت)',
+                text: 'وضعیت مطلوب (آنچه که الان باید باشد)',
                 bold: true,
                 rightToLeft: true
               })]
@@ -52,7 +52,7 @@ export class DocService {
             children: [new Paragraph({
               bidirectional: true,
               children: [new TextRun({
-                text: 'دۆخی ئارایی (ئەوەی كە ئێستا هەیە)',
+                text: 'وضعیت موجود (آنچه که الان هست)',
                 bold: true,
                 rightToLeft: true
               })]
@@ -68,7 +68,7 @@ export class DocService {
             children: [new Paragraph({
               bidirectional: true,
               children: [new TextRun({
-                text: 'زۆر كەم',
+                text: 'خیلی کم',
                 bold: true,
                 rightToLeft: true
               })]
@@ -78,7 +78,7 @@ export class DocService {
             children: [new Paragraph({
               bidirectional: true,
               children: [new TextRun({
-                text: 'كەم',
+                text: 'کم',
                 bold: true,
                 rightToLeft: true
               })]
@@ -88,7 +88,7 @@ export class DocService {
             children: [new Paragraph({
               bidirectional: true,
               children: [new TextRun({
-                text: 'مامناوەند',
+                text: 'متوسط',
                 bold: true,
                 rightToLeft: true
               })]
@@ -98,7 +98,7 @@ export class DocService {
             children: [new Paragraph({
               bidirectional: true,
               children: [new TextRun({
-                text: 'زۆر',
+                text: 'زیاد',
                 bold: true,
                 rightToLeft: true
               })]
@@ -108,7 +108,7 @@ export class DocService {
             children: [new Paragraph({
               bidirectional: true,
               children: [new TextRun({
-                text: 'زۆر زۆر',
+                text: 'خیلی زیاد',
                 bold: true,
                 rightToLeft: true
               })]
@@ -118,7 +118,7 @@ export class DocService {
             children: [new Paragraph({
               bidirectional: true,
               children: [new TextRun({
-                text: 'زۆر كەم',
+                text: 'خیلی کم',
                 bold: true,
                 rightToLeft: true
               })]
@@ -128,7 +128,7 @@ export class DocService {
             children: [new Paragraph({
               bidirectional: true,
               children: [new TextRun({
-                text: 'كەم',
+                text: 'کم',
                 bold: true,
                 rightToLeft: true
               })]
@@ -138,7 +138,7 @@ export class DocService {
             children: [new Paragraph({
               bidirectional: true,
               children: [new TextRun({
-                text: 'مامناوەند',
+                text: 'متوسط',
                 bold: true,
                 rightToLeft: true
               })]
@@ -148,7 +148,7 @@ export class DocService {
             children: [new Paragraph({
               bidirectional: true,
               children: [new TextRun({
-                text: 'زۆر',
+                text: 'زیاد',
                 bold: true,
                 rightToLeft: true
               })]
@@ -158,7 +158,7 @@ export class DocService {
             children: [new Paragraph({
               bidirectional: true,
               children: [new TextRun({
-                text: 'زۆر زۆر',
+                text: 'خیلی زیاد',
                 bold: true,
                 rightToLeft: true
               })]

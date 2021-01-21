@@ -46,25 +46,25 @@ export class ExcelService {
       });
 
       worksheet.mergeCells(index + 1, 1, index + 1, 5);
-      worksheet.getCell(index + 1, 1).value = 'دۆخی ئارایی (ئەوەی كە ئێستا هەیە)';
+      worksheet.getCell(index + 1, 1).value = 'وضعیت موجود (آنچه که الان هست)';
 
       worksheet.mergeCells(index + 1, 7, index + 1, 11);
-      worksheet.getCell(index + 1, 7).value = 'دۆخی خوازراو (ئەوەی كە ئێستا دەبێت هەبێت)';
+      worksheet.getCell(index + 1, 7).value = 'وضعیت مطلوب (آنچه که الان باید باشد)';
 
-      worksheet.getCell(index + 2, 1).value = 'زۆر زۆر';
-      worksheet.getCell(index + 2, 2).value = 'زۆر';
-      worksheet.getCell(index + 2, 3).value = 'مامناوەند';
-      worksheet.getCell(index + 2, 4).value = 'كەم';
-      worksheet.getCell(index + 2, 5).value = 'زۆر كەم';
+      worksheet.getCell(index + 2, 1).value = 'خیلی زیاد';
+      worksheet.getCell(index + 2, 2).value = 'زیاد';
+      worksheet.getCell(index + 2, 3).value = 'متوسط';
+      worksheet.getCell(index + 2, 4).value = 'کم';
+      worksheet.getCell(index + 2, 5).value = 'خیلی کم';
 
       worksheet.mergeCells(index + 1, 6, index + 2, 6);
       worksheet.getCell(index + 1, 6).value = v.title;
 
-      worksheet.getCell(index + 2, 7).value = 'زۆر زۆر';
-      worksheet.getCell(index + 2, 8).value = 'زۆر';
-      worksheet.getCell(index + 2, 9).value = 'مامناوەند';
-      worksheet.getCell(index + 2, 10).value = 'كەم';
-      worksheet.getCell(index + 2, 11).value = 'زۆر كەم';
+      worksheet.getCell(index + 2, 7).value = 'خیلی زیاد';
+      worksheet.getCell(index + 2, 8).value = 'زیاد';
+      worksheet.getCell(index + 2, 9).value = 'متوسط';
+      worksheet.getCell(index + 2, 10).value = 'کم';
+      worksheet.getCell(index + 2, 11).value = 'خیلی کم';
 
       v.statisticsQuestions.forEach((qv, qi) => {
         worksheet.getCell(index + 3 + qi, 1).value = this.getQuestionAnswerCount(qv.noramlAnswers, 'زۆر زۆر');
