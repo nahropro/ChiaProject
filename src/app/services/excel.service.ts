@@ -135,12 +135,12 @@ export class ExcelService {
 
     forms.forEach((v, i) => {
       //Set personal info data
-      ws.getCell(i+1+1, 1).value = v.personalInfo.age;
-      ws.getCell(i+1+1, 2).value = v.personalInfo.gender === 'نێر' ? 1 : 2;
-      ws.getCell(i+1+1, 3).value = this.generalService.getNumericalValueOfEducationLevel(v.personalInfo.educationLevel);
-      ws.getCell(i+1+1, 4).value = this.generalService.getNumericalValueOfJobExperience(v.personalInfo.jobExperience);
-      ws.getCell(i+1+1, 5).value = this.generalService.getNumericalValueOfJobType(v.personalInfo.jobType);
-      ws.getCell(i+1+1, 6).value = this.generalService.getNumericalValueOfExperienceType(v.personalInfo.experienceType);
+      ws.getCell(i + 1 + 1, 1).value = v.personalInfo.age;
+      ws.getCell(i + 1 + 1, 2).value = v.personalInfo.gender === 'نێر' ? 1 : 2;
+      ws.getCell(i + 1 + 1, 3).value = this.generalService.getNumericalValueOfEducationLevel(v.personalInfo.educationLevel);
+      ws.getCell(i + 1 + 1, 4).value = this.generalService.getNumericalValueOfJobExperience(v.personalInfo.jobExperience);
+      ws.getCell(i + 1 + 1, 5).value = this.generalService.getNumericalValueOfJobType(v.personalInfo.jobType);
+      ws.getCell(i + 1 + 1, 6).value = this.generalService.getNumericalValueOfExperienceType(v.personalInfo.experienceType);
 
       //Set question result
       const questions: Question[] = [...v.questionGroup1.questions, ...v.questionGroup2.questions, ...v.questionGroup3.questions, ...v.questionGroup4.questions];
@@ -157,6 +157,26 @@ export class ExcelService {
 
     ws.views = [{ rightToLeft: true }];
 
-    ws.getCell(1, 1).value = 'Hi';
+    //Set gender
+    ws.getCell(1, 1).value = 'مرد';
+    ws.getCell(1, 2).value = '1';
+    ws.getCell(2, 1).value = 'زن';
+    ws.getCell(2, 2).value = '2';
+    this.setBorder(ws,1,1,2,2);
+  }
+
+  private setBorder(ws: Worksheet, top: number, left: number, bottom: number, right: number) {
+    for (let i = top; i <= bottom; i++) {
+      for (let j = left; j <= right; j++) {
+        ws.getCell(i, j).style = Object.assign(ws.getCell(i, j).style, {
+          border: {
+            top: { style: 'thin' },
+            left: { style: 'thin' },
+            bottom: { style: 'thin' },
+            right: { style: 'thin' },
+          }
+        });
+      }
+    }
   }
 }
