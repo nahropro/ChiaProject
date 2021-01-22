@@ -6,6 +6,7 @@ import { Injectable } from '@angular/core';
 import { Style, Workbook, Worksheet } from 'exceljs';
 import { StatisticsCount } from '../models/statistics-count.model';
 import * as fs from 'file-saver';
+import { questionGroup1, questionGroup2, questionGroup3, questionGroup4 } from '../meta-data/form.meta-data';
 
 @Injectable({
   providedIn: 'root'
@@ -101,22 +102,61 @@ export class ExcelService {
 
   exportForms(forms: Form[], filename: string) {
     let wb = new Workbook();
-    let ws = wb.addWorksheet('sheet');
 
-    ws.views = [{ rightToLeft: true }];
-
-    forms.forEach((v, i) => {
-      const questions: Question[] = [...v.questionGroup1.questions, ...v.questionGroup2.questions, ...v.questionGroup3.questions, ...v.questionGroup4.questions];
-
-      questions.forEach((qv,qi)=>{
-        ws.getCell(i+1+1,(qi*2)+1).value=qv.normalAnswer;
-        ws.getCell(i+1+1,(qi*2)+1+1).value=qv.wantedAnswer;
-      })
-    });
+    this.exportFormsSheet1(wb, forms);
+    this.exportFormsSheet2(wb);
 
     wb.xlsx.writeBuffer().then((data) => {
       let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
       fs.saveAs(blob, filename + '.xlsx');
     })
+  }
+
+  private exportFormsSheet1(wb: Workbook, forms: Form[]) {
+    let ws = wb.addWorksheet('sheet1');
+
+    ws.views = [{ rightToLeft: true }];
+
+    //Set headers
+    //Set personal info headers
+    ws.getCell(1, 1).value = 'سن';
+    ws.getCell(1, 2).value = 'جنسیت';
+    ws.getCell(1, 3).value = 'میزان تحصیلات';
+    ws.getCell(1, 4).value = 'سابقه مدت کاري';
+    ws.getCell(1, 5).value = 'موقعیت شغلی';
+    ws.getCell(1, 6).value = 'رشته تخصصی';
+
+    //Set question headers
+    const questions: Question[] = [...questionGroup1.questions, ...questionGroup2.questions, ...questionGroup3.questions, ...questionGroup4.questions];
+    questions.forEach((qv, qi) => {
+      ws.getCell(1, 6 + (qi * 2) + 1).value = qv.titlef + ' (موجود)';
+      ws.getCell(1, 6 + (qi * 2) + 1 + 1).value = qv.titlef + ' (مطلوب)';
+    })
+
+    forms.forEach((v, i) => {
+      //Set personal info data
+      ws.getCell(i+1+1, 1).value = v.personalInfo.age;
+      ws.getCell(i+1+1, 2).value = v.personalInfo.gender === 'نێر' ? 1 : 2;
+      ws.getCell(i+1+1, 3).value = this.generalService.getNumericalValueOfEducationLevel(v.personalInfo.educationLevel);
+      ws.getCell(i+1+1, 4).value = this.generalService.getNumericalValueOfJobExperience(v.personalInfo.jobExperience);
+      ws.getCell(i+1+1, 5).value = this.generalService.getNumericalValueOfJobType(v.personalInfo.jobType);
+      ws.getCell(i+1+1, 6).value = this.generalService.getNumericalValueOfExperienceType(v.personalInfo.experienceType);
+
+      //Set question result
+      const questions: Question[] = [...v.questionGroup1.questions, ...v.questionGroup2.questions, ...v.questionGroup3.questions, ...v.questionGroup4.questions];
+
+      questions.forEach((qv, qi) => {
+        ws.getCell(i + 1 + 1, 6 + (qi * 2) + 1).value = this.generalService.getNumericalValueOfAnswer(qv.normalAnswer);
+        ws.getCell(i + 1 + 1, 6 + (qi * 2) + 1 + 1).value = this.generalService.getNumericalValueOfAnswer(qv.wantedAnswer);
+      })
+    });
+  }
+
+  private exportFormsSheet2(wb: Workbook) {
+    let ws = wb.addWorksheet('sheet2');
+
+    ws.views = [{ rightToLeft: true }];
+
+    ws.getCell(1, 1).value = 'Hi';
   }
 }
