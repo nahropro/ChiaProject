@@ -1,3 +1,4 @@
+import { GeneralService } from './services/general.service';
 import { BackupService } from './services/backup.service';
 import { MigrationService } from './services/migration.service';
 import { DocService } from './services/doc.service';
@@ -73,7 +74,8 @@ import { BackupComponent } from './components/backup/backup.component';
     ExcelService,
     DocService,
     MigrationService,
-    BackupService
+    BackupService,
+    GeneralService
   ],
   bootstrap: [AppComponent]
 })

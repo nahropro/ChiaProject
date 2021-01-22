@@ -1,3 +1,4 @@
+import { GeneralService } from './general.service';
 import { Injectable } from '@angular/core';
 import { StatisticsCount } from '../models/statistics-count.model';
 import { StatisticsQuestionGroup } from '../models/statistics-question-group.model';
@@ -9,7 +10,7 @@ import * as fs from 'file-saver';
 })
 export class DocService {
 
-  constructor() { }
+  constructor(private generalService: GeneralService) { }
 
 
   exportStatistics(statisticsQuestionGroupes: StatisticsQuestionGroup[], filename: string) {
@@ -174,7 +175,7 @@ export class DocService {
               children: [new Paragraph({
                 bidirectional: true,
                 children: [new TextRun({
-                  text: this.getQuestionAnswerCount(d.wantedAnswers, 'زۆر كەم').toString(),
+                  text: this.generalService.getQuestionAnswerCount(d.wantedAnswers, 'زۆر كەم').toString(),
                   rightToLeft: true
                 })]
               })]
@@ -183,7 +184,7 @@ export class DocService {
               children: [new Paragraph({
                 bidirectional: true,
                 children: [new TextRun({
-                  text: this.getQuestionAnswerCount(d.wantedAnswers, 'كەم').toString(),
+                  text: this.generalService.getQuestionAnswerCount(d.wantedAnswers, 'كەم').toString(),
                   rightToLeft: true
                 })]
               })]
@@ -192,7 +193,7 @@ export class DocService {
               children: [new Paragraph({
                 bidirectional: true,
                 children: [new TextRun({
-                  text: this.getQuestionAnswerCount(d.wantedAnswers, 'مامناوەند').toString(),
+                  text: this.generalService.getQuestionAnswerCount(d.wantedAnswers, 'مامناوەند').toString(),
                   rightToLeft: true
                 })]
               })]
@@ -201,7 +202,7 @@ export class DocService {
               children: [new Paragraph({
                 bidirectional: true,
                 children: [new TextRun({
-                  text: this.getQuestionAnswerCount(d.wantedAnswers, 'زۆر').toString(),
+                  text: this.generalService.getQuestionAnswerCount(d.wantedAnswers, 'زۆر').toString(),
                   rightToLeft: true
                 })]
               })]
@@ -210,7 +211,7 @@ export class DocService {
               children: [new Paragraph({
                 bidirectional: true,
                 children: [new TextRun({
-                  text: this.getQuestionAnswerCount(d.wantedAnswers, 'زۆر زۆر').toString(),
+                  text: this.generalService.getQuestionAnswerCount(d.wantedAnswers, 'زۆر زۆر').toString(),
                   rightToLeft: true
                 })]
               })]
@@ -228,7 +229,7 @@ export class DocService {
               children: [new Paragraph({
                 bidirectional: true,
                 children: [new TextRun({
-                  text: this.getQuestionAnswerCount(d.noramlAnswers, 'زۆر كەم').toString(),
+                  text: this.generalService.getQuestionAnswerCount(d.noramlAnswers, 'زۆر كەم').toString(),
                   rightToLeft: true
                 })]
               })]
@@ -237,7 +238,7 @@ export class DocService {
               children: [new Paragraph({
                 bidirectional: true,
                 children: [new TextRun({
-                  text: this.getQuestionAnswerCount(d.noramlAnswers, 'كەم').toString(),
+                  text: this.generalService.getQuestionAnswerCount(d.noramlAnswers, 'كەم').toString(),
                   rightToLeft: true
                 })]
               })]
@@ -246,7 +247,7 @@ export class DocService {
               children: [new Paragraph({
                 bidirectional: true,
                 children: [new TextRun({
-                  text: this.getQuestionAnswerCount(d.noramlAnswers, 'مامناوەند').toString(),
+                  text: this.generalService.getQuestionAnswerCount(d.noramlAnswers, 'مامناوەند').toString(),
                   rightToLeft: true
                 })]
               })]
@@ -255,7 +256,7 @@ export class DocService {
               children: [new Paragraph({
                 bidirectional: true,
                 children: [new TextRun({
-                  text: this.getQuestionAnswerCount(d.noramlAnswers, 'زۆر').toString(),
+                  text: this.generalService.getQuestionAnswerCount(d.noramlAnswers, 'زۆر').toString(),
                   rightToLeft: true
                 })]
               })]
@@ -264,7 +265,7 @@ export class DocService {
               children: [new Paragraph({
                 bidirectional: true,
                 children: [new TextRun({
-                  text: this.getQuestionAnswerCount(d.noramlAnswers, 'زۆر زۆر').toString(),
+                  text: this.generalService.getQuestionAnswerCount(d.noramlAnswers, 'زۆر زۆر').toString(),
                   rightToLeft: true
                 })]
               })]
@@ -285,9 +286,5 @@ export class DocService {
     Packer.toBlob(doc).then((blob) => {
       fs.saveAs(blob, filename + '.docx');
     });
-  }
-
-  private getQuestionAnswerCount(data: StatisticsCount[], answer: string): number {
-    return data?.find(d => d.title == answer)?.count || 0;
   }
 }

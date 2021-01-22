@@ -1,3 +1,4 @@
+import { GeneralService } from './../../services/general.service';
 import { StatisticsCount } from './../../models/statistics-count.model';
 import { StatisticsQuestionGroup } from './../../models/statistics-question-group.model';
 import { Component, Input, OnInit } from '@angular/core';
@@ -10,12 +11,8 @@ import { Component, Input, OnInit } from '@angular/core';
 export class StatisticsQuestionGroupViewComponent implements OnInit {
   @Input() data:StatisticsQuestionGroup;
 
-  constructor() { }
+  constructor(public generalService: GeneralService) { }
 
   ngOnInit(): void {
-  }
-
-  getQuestionAnswerCount(data: StatisticsCount[],answer: string): number{
-    return data?.find(d=> d.title==answer)?.count || 0;
   }
 }

@@ -1,3 +1,5 @@
+import { GeneralService } from './general.service';
+import { Question } from 'src/app/models/question.model';
 import { Form } from './../models/form.model';
 import { StatisticsQuestionGroup } from './../models/statistics-question-group.model';
 import { Injectable } from '@angular/core';
@@ -10,9 +12,9 @@ import * as fs from 'file-saver';
 })
 export class ExcelService {
 
-  constructor() { }
+  constructor(private generalService: GeneralService) { }
 
-  exportStatistics(stattisticsQuestionGroupes: StatisticsQuestionGroup[], filename: string){
+  exportStatistics(stattisticsQuestionGroupes: StatisticsQuestionGroup[], filename: string) {
     let workbook = new Workbook();
     let worksheet = workbook.addWorksheet('sheet');
 
@@ -36,12 +38,12 @@ export class ExcelService {
       });
 
       //set border for question groups
-      this.excelStyleRange(worksheet,index+1,1,index+2+v.statisticsQuestions.length,11,{
-        border:{
-          top:{style:'thin'},
-          left:{style:'thin'},
-          bottom:{style:'thin'},
-          right:{style:'thin'},
+      this.excelStyleRange(worksheet, index + 1, 1, index + 2 + v.statisticsQuestions.length, 11, {
+        border: {
+          top: { style: 'thin' },
+          left: { style: 'thin' },
+          bottom: { style: 'thin' },
+          right: { style: 'thin' },
         }
       });
 
@@ -67,17 +69,17 @@ export class ExcelService {
       worksheet.getCell(index + 2, 11).value = 'خیلی کم';
 
       v.statisticsQuestions.forEach((qv, qi) => {
-        worksheet.getCell(index + 3 + qi, 1).value = this.getQuestionAnswerCount(qv.noramlAnswers, 'زۆر زۆر');
-        worksheet.getCell(index + 3 + qi, 2).value = this.getQuestionAnswerCount(qv.noramlAnswers, 'زۆر');
-        worksheet.getCell(index + 3 + qi, 3).value = this.getQuestionAnswerCount(qv.noramlAnswers, 'مامناوەند');
-        worksheet.getCell(index + 3 + qi, 4).value = this.getQuestionAnswerCount(qv.noramlAnswers, 'كەم');
-        worksheet.getCell(index + 3 + qi, 5).value = this.getQuestionAnswerCount(qv.noramlAnswers, 'زۆر كەم');
+        worksheet.getCell(index + 3 + qi, 1).value = this.generalService.getQuestionAnswerCount(qv.noramlAnswers, 'زۆر زۆر');
+        worksheet.getCell(index + 3 + qi, 2).value = this.generalService.getQuestionAnswerCount(qv.noramlAnswers, 'زۆر');
+        worksheet.getCell(index + 3 + qi, 3).value = this.generalService.getQuestionAnswerCount(qv.noramlAnswers, 'مامناوەند');
+        worksheet.getCell(index + 3 + qi, 4).value = this.generalService.getQuestionAnswerCount(qv.noramlAnswers, 'كەم');
+        worksheet.getCell(index + 3 + qi, 5).value = this.generalService.getQuestionAnswerCount(qv.noramlAnswers, 'زۆر كەم');
         worksheet.getCell(index + 3 + qi, 6).value = qv.titlef;
-        worksheet.getCell(index + 3 + qi, 7).value = this.getQuestionAnswerCount(qv.wantedAnswers, 'زۆر زۆر');
-        worksheet.getCell(index + 3 + qi, 8).value = this.getQuestionAnswerCount(qv.wantedAnswers, 'زۆر');
-        worksheet.getCell(index + 3 + qi, 9).value = this.getQuestionAnswerCount(qv.wantedAnswers, 'مامناوەند');
-        worksheet.getCell(index + 3 + qi, 10).value = this.getQuestionAnswerCount(qv.wantedAnswers, 'كەم');
-        worksheet.getCell(index + 3 + qi, 11).value = this.getQuestionAnswerCount(qv.wantedAnswers, 'زۆر كەم');
+        worksheet.getCell(index + 3 + qi, 7).value = this.generalService.getQuestionAnswerCount(qv.wantedAnswers, 'زۆر زۆر');
+        worksheet.getCell(index + 3 + qi, 8).value = this.generalService.getQuestionAnswerCount(qv.wantedAnswers, 'زۆر');
+        worksheet.getCell(index + 3 + qi, 9).value = this.generalService.getQuestionAnswerCount(qv.wantedAnswers, 'مامناوەند');
+        worksheet.getCell(index + 3 + qi, 10).value = this.generalService.getQuestionAnswerCount(qv.wantedAnswers, 'كەم');
+        worksheet.getCell(index + 3 + qi, 11).value = this.generalService.getQuestionAnswerCount(qv.wantedAnswers, 'زۆر كەم');
       });
     });
 
@@ -85,31 +87,36 @@ export class ExcelService {
 
     workbook.xlsx.writeBuffer().then((data) => {
       let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-      fs.saveAs(blob, filename+'.xlsx');
+      fs.saveAs(blob, filename + '.xlsx');
     });
-  }
-
-  private getQuestionAnswerCount(data: StatisticsCount[], answer: string): number {
-    return data?.find(d => d.title == answer)?.count || 0;
   }
 
   private excelStyleRange(ws: Worksheet, top: number, left: number, bottom: number, right: number, style: Partial<Style>) {
     for (let i = top; i <= bottom; i++) {
       for (let j = left; j <= right; j++) {
-        ws.getCell(i, j).style = Object.assign(ws.getCell(i, j).style,style);
+        ws.getCell(i, j).style = Object.assign(ws.getCell(i, j).style, style);
       }
     }
   }
 
-  exportForms(forms: Form[], filename: string){
-    let workbook = new Workbook();
-    let worksheet = workbook.addWorksheet('sheet');
+  exportForms(forms: Form[], filename: string) {
+    let wb = new Workbook();
+    let ws = wb.addWorksheet('sheet');
 
-    worksheet.views = [{ rightToLeft: true }];
+    ws.views = [{ rightToLeft: true }];
 
-    workbook.xlsx.writeBuffer().then((data) => {
+    forms.forEach((v, i) => {
+      const questions: Question[] = [...v.questionGroup1.questions, ...v.questionGroup2.questions, ...v.questionGroup3.questions, ...v.questionGroup4.questions];
+
+      questions.forEach((qv,qi)=>{
+        ws.getCell(i+1+1,(qi*2)+1).value=qv.normalAnswer;
+        ws.getCell(i+1+1,(qi*2)+1+1).value=qv.wantedAnswer;
+      })
+    });
+
+    wb.xlsx.writeBuffer().then((data) => {
       let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
-      fs.saveAs(blob, filename+'.xlsx');
+      fs.saveAs(blob, filename + '.xlsx');
     })
   }
 }

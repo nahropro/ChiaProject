@@ -3,7 +3,7 @@
         <thead class="text-primary">
             <tr>
                 <th colspan="5">دۆخی ئارایی (ئەوەی كە ئێستا هەیە)</th>
-                <th rowspan="2">{{data.title}}</th>
+                <th rowspan="2">{{data.titlef}}</th>
                 <th colspan="5">دۆخی خوازراو (ئەوەی كە ئێستا دەبێت هەبێت)</th>
             </tr>
             <tr>
@@ -22,17 +22,17 @@
 
         <tbody>
             <tr *ngFor="let q of data.statisticsQuestions">
-                <td>{{getQuestionAnswerCount(q.noramlAnswers,'زۆر زۆر')}}</td>
-                <td>{{getQuestionAnswerCount(q.noramlAnswers,'زۆر')}}</td>
-                <td>{{getQuestionAnswerCount(q.noramlAnswers,'مامناوەند')}}</td>
-                <td>{{getQuestionAnswerCount(q.noramlAnswers,'كەم')}}</td>
-                <td>{{getQuestionAnswerCount(q.noramlAnswers,'زۆر كەم')}}</td>
-                <td><p>{{q.title}}</p></td>
-                <td>{{getQuestionAnswerCount(q.wantedAnswers,'زۆر زۆر')}}</td>
-                <td>{{getQuestionAnswerCount(q.wantedAnswers,'زۆر')}}</td>
-                <td>{{getQuestionAnswerCount(q.wantedAnswers,'مامناوەند')}}</td>
-                <td>{{getQuestionAnswerCount(q.wantedAnswers,'كەم')}}</td>
-                <td>{{getQuestionAnswerCount(q.wantedAnswers,'زۆر كەم')}}</td>
+                <td>{{generalService.getQuestionAnswerCount(q.noramlAnswers,'زۆر زۆر')}}</td>
+                <td>{{generalService.getQuestionAnswerCount(q.noramlAnswers,'زۆر')}}</td>
+                <td>{{generalService.getQuestionAnswerCount(q.noramlAnswers,'مامناوەند')}}</td>
+                <td>{{generalService.getQuestionAnswerCount(q.noramlAnswers,'كەم')}}</td>
+                <td>{{generalService.getQuestionAnswerCount(q.noramlAnswers,'زۆر كەم')}}</td>
+                <td><p>{{q.titlef}}</p></td>
+                <td>{{generalService.getQuestionAnswerCount(q.wantedAnswers,'زۆر زۆر')}}</td>
+                <td>{{generalService.getQuestionAnswerCount(q.wantedAnswers,'زۆر')}}</td>
+                <td>{{generalService.getQuestionAnswerCount(q.wantedAnswers,'مامناوەند')}}</td>
+                <td>{{generalService.getQuestionAnswerCount(q.wantedAnswers,'كەم')}}</td>
+                <td>{{generalService.getQuestionAnswerCount(q.wantedAnswers,'زۆر كەم')}}</td>
             </tr>
         </tbody>
     </table>
