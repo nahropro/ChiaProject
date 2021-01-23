@@ -119,35 +119,37 @@ export class ExcelService {
 
     //Set headers
     //Set personal info headers
-    ws.getCell(1, 1).value = 'سن'.replace(/ /g,'_');
-    ws.getCell(1, 2).value = 'جنسیت'.replace(/ /g,'_');
-    ws.getCell(1, 3).value = 'میزان تحصیلات'.replace(/ /g,'_');
-    ws.getCell(1, 4).value = 'سابقه مدت کاري'.replace(/ /g,'_');
-    ws.getCell(1, 5).value = 'موقعیت شغلی'.replace(/ /g,'_');
-    ws.getCell(1, 6).value = 'رشته تخصصی'.replace(/ /g,'_');
+    ws.getCell(1, 1).value = 'نام'.replace(/ /g,'_');
+    ws.getCell(1, 2).value = 'سن'.replace(/ /g,'_');
+    ws.getCell(1, 3).value = 'جنسیت'.replace(/ /g,'_');
+    ws.getCell(1, 4).value = 'میزان تحصیلات'.replace(/ /g,'_');
+    ws.getCell(1, 5).value = 'سابقه مدت کاري'.replace(/ /g,'_');
+    ws.getCell(1, 6).value = 'موقعیت شغلی'.replace(/ /g,'_');
+    ws.getCell(1, 7).value = 'رشته تخصصی'.replace(/ /g,'_');
 
     //Set question headers
     const questions: Question[] = [...questionGroup1.questions, ...questionGroup2.questions, ...questionGroup3.questions, ...questionGroup4.questions];
     questions.forEach((qv, qi) => {
-      ws.getCell(1, 6 + (qi * 2) + 1).value = (qv.titlef + ' (موجود)').replace(/ /g,'_');
-      ws.getCell(1, 6 + (qi * 2) + 1 + 1).value = (qv.titlef + ' (مطلوب)').replace(/ /g,'_');
+      ws.getCell(1, 7 + (qi * 2) + 1).value = (qv.titlef + ' (موجود)').replace(/ /g,'_');
+      ws.getCell(1, 7 + (qi * 2) + 1 + 1).value = (qv.titlef + ' (مطلوب)').replace(/ /g,'_');
     })
 
     forms.forEach((v, i) => {
       //Set personal info data
-      ws.getCell(i + 1 + 1, 1).value = v.personalInfo.age;
-      ws.getCell(i + 1 + 1, 2).value = v.personalInfo.gender === 'نێر' ? 1 : 2;
-      ws.getCell(i + 1 + 1, 3).value = this.generalService.getNumericalValueOfEducationLevel(v.personalInfo.educationLevel);
-      ws.getCell(i + 1 + 1, 4).value = this.generalService.getNumericalValueOfJobExperience(v.personalInfo.jobExperience);
-      ws.getCell(i + 1 + 1, 5).value = this.generalService.getNumericalValueOfJobType(v.personalInfo.jobType);
-      ws.getCell(i + 1 + 1, 6).value = this.generalService.getNumericalValueOfExperienceType(v.personalInfo.experienceType);
+      ws.getCell(i + 1 + 1, 1).value = v.personalInfo.fullName;
+      ws.getCell(i + 1 + 1, 2).value = v.personalInfo.age;
+      ws.getCell(i + 1 + 1, 3).value = v.personalInfo.gender === 'نێر' ? 1 : 2;
+      ws.getCell(i + 1 + 1, 4).value = this.generalService.getNumericalValueOfEducationLevel(v.personalInfo.educationLevel);
+      ws.getCell(i + 1 + 1, 5).value = this.generalService.getNumericalValueOfJobExperience(v.personalInfo.jobExperience);
+      ws.getCell(i + 1 + 1, 6).value = this.generalService.getNumericalValueOfJobType(v.personalInfo.jobType);
+      ws.getCell(i + 1 + 1, 7).value = this.generalService.getNumericalValueOfExperienceType(v.personalInfo.experienceType);
 
       //Set question result
       const questions: Question[] = [...v.questionGroup1.questions, ...v.questionGroup2.questions, ...v.questionGroup3.questions, ...v.questionGroup4.questions];
 
       questions.forEach((qv, qi) => {
-        ws.getCell(i + 1 + 1, 6 + (qi * 2) + 1).value = this.generalService.getNumericalValueOfAnswer(qv.normalAnswer);
-        ws.getCell(i + 1 + 1, 6 + (qi * 2) + 1 + 1).value = this.generalService.getNumericalValueOfAnswer(qv.wantedAnswer);
+        ws.getCell(i + 1 + 1, 7 + (qi * 2) + 1).value = this.generalService.getNumericalValueOfAnswer(qv.normalAnswer);
+        ws.getCell(i + 1 + 1, 7 + (qi * 2) + 1 + 1).value = this.generalService.getNumericalValueOfAnswer(qv.wantedAnswer);
       })
     });
   }
