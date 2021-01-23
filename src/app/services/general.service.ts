@@ -75,6 +75,8 @@ export class GeneralService {
         return 3;
       case 'جێبەجێكاری':
         return 4;
+      default:
+        return 0;
     }
   }
 
