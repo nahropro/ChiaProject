@@ -119,18 +119,18 @@ export class ExcelService {
 
     //Set headers
     //Set personal info headers
-    ws.getCell(1, 1).value = 'سن';
-    ws.getCell(1, 2).value = 'جنسیت';
-    ws.getCell(1, 3).value = 'میزان تحصیلات';
-    ws.getCell(1, 4).value = 'سابقه مدت کاري';
-    ws.getCell(1, 5).value = 'موقعیت شغلی';
-    ws.getCell(1, 6).value = 'رشته تخصصی';
+    ws.getCell(1, 1).value = 'سن'.replace(/ /g,'_');
+    ws.getCell(1, 2).value = 'جنسیت'.replace(/ /g,'_');
+    ws.getCell(1, 3).value = 'میزان تحصیلات'.replace(/ /g,'_');
+    ws.getCell(1, 4).value = 'سابقه مدت کاري'.replace(/ /g,'_');
+    ws.getCell(1, 5).value = 'موقعیت شغلی'.replace(/ /g,'_');
+    ws.getCell(1, 6).value = 'رشته تخصصی'.replace(/ /g,'_');
 
     //Set question headers
     const questions: Question[] = [...questionGroup1.questions, ...questionGroup2.questions, ...questionGroup3.questions, ...questionGroup4.questions];
     questions.forEach((qv, qi) => {
-      ws.getCell(1, 6 + (qi * 2) + 1).value = qv.titlef + ' (موجود)';
-      ws.getCell(1, 6 + (qi * 2) + 1 + 1).value = qv.titlef + ' (مطلوب)';
+      ws.getCell(1, 6 + (qi * 2) + 1).value = (qv.titlef + ' (موجود)').replace(/ /g,'_');
+      ws.getCell(1, 6 + (qi * 2) + 1 + 1).value = (qv.titlef + ' (مطلوب)').replace(/ /g,'_');
     })
 
     forms.forEach((v, i) => {
