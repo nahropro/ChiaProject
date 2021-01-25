@@ -1,8 +1,9 @@
+import { suggestionGroup } from './../meta-data/form.meta-data';
 import { GeneralService } from './general.service';
 import { Injectable } from '@angular/core';
 import { StatisticsCount } from '../models/statistics-count.model';
 import { StatisticsQuestionGroup } from '../models/statistics-question-group.model';
-import { BorderStyle, Document, OverlapType, Packer, Paragraph, RelativeHorizontalPosition, RelativeVerticalPosition, Table, TableAnchorType, TableCell, TableRow, TextRun, VerticalAlign } from "docx";
+import { BorderStyle, Document, Numbering, OverlapType, Packer, Paragraph, RelativeHorizontalPosition, RelativeVerticalPosition, Table, TableAnchorType, TableCell, TableRow, TextRun, VerticalAlign } from "docx";
 import * as fs from 'file-saver';
 
 @Injectable({
@@ -16,7 +17,7 @@ export class DocService {
   exportStatistics(statisticsQuestionGroupes: StatisticsQuestionGroup[], filename: string) {
     const doc = new Document({});
 
-    const tables: Table[]=[];
+    const tables: Table[] = [];
 
     statisticsQuestionGroupes.forEach(qg => {
       const rows: TableRow[] = [];
@@ -278,9 +279,48 @@ export class DocService {
 
       tables.push(new Table({ rows: rows }));
     })
-    
+
+    const verticalSpace: Paragraph = new Paragraph({
+      bidirectional: true,
+      children: [
+        new TextRun({
+          text: '',
+          rightToLeft: true
+        })
+      ]
+    });
+
+    const sgHeader: Paragraph = new Paragraph({
+      bidirectional: true,
+      children: [
+        new TextRun({
+          text: suggestionGroup.titlef,
+          rightToLeft: true,
+          bold: true
+        })
+      ]
+    });
+
+    const suggestions: Paragraph[] = [];
+
+    suggestionGroup.suggestions.forEach(v => {
+      suggestions.push(new Paragraph({
+        bidirectional: true,
+        children: [
+          new TextRun({
+            text: v.value,
+            rightToLeft: true
+          })
+        ],
+        bullet: {
+          level: 0,
+        }
+      }));
+    });
+
+
     doc.addSection({
-      children: [...tables],
+      children: [...tables, verticalSpace, sgHeader, ...suggestions],
     });
 
     Packer.toBlob(doc).then((blob) => {
