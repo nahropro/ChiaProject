@@ -1,3 +1,4 @@
+import { SuggestionGroup } from './../models/suggestion-group.model';
 import { QuestionGroup } from './../models/question-group.model';
 
 export const questionGroup1: QuestionGroup = {
@@ -313,3 +314,30 @@ export const questionGroup4: QuestionGroup = {
     ]
 
 };
+
+export const suggestionGroup: SuggestionGroup = {
+    id: 1,
+    titlef: 'پیشنهادهای برگزیدەو پسندیدە برای توسعە ورزش فوتسال درشهر کلار',
+    suggestions: [
+        {
+            key: 1,
+            value: 'نجارم دادن مسابقات فوتسال،در مدرسها برای دانش آموزان.'
+        },
+        {
+            key: 2,
+            value: 'انجام دادن مسابقات فوتسال برای تیمهای مللی شهر کلار،برای بیشتر اشنا شدن بازیکنان با بازیی فوتسال.'
+        },
+        {
+            key: 3,
+            value: 'برگزاری کلاس های آموزشی برای مربیان فوتسال شهر کلار از طرف دانشگاە گرمیان،این هم بە هدف توسعە یافتن ورزش فوتسال در شهر کلار؛براساس قوانین جدید فوتسال.'
+        },
+        {
+            key: 4,
+            value: 'ساختن ورزشگاە مختص بە فوتسال در شهر کلار برای برگزارشدن مسابقات فوتسال.'
+        },
+        {
+            key: 5,
+            value: 'پخش آگاهی دربارە این ورزش دراماکن عمومی وملی و شهرستان ها وروستاها.'
+        },
+    ]
+}

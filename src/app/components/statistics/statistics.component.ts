@@ -2,12 +2,15 @@ import { Component, OnDestroy, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { Form } from 'src/app/models/form.model';
 import { Question } from 'src/app/models/question.model';
+import { SuggestionGroup } from 'src/app/models/suggestion-group.model';
 import { FormServiceService } from 'src/app/services/form-service.service';
+import { suggestionGroup } from './../../meta-data/form.meta-data';
 import { StatisticsCount } from './../../models/statistics-count.model';
 import { StatisticsQuestionGroup } from './../../models/statistics-question-group.model';
 import { StatisticsQuestion } from './../../models/statistics-question.model';
 import { DocService } from './../../services/doc.service';
 import { ExcelService } from './../../services/excel.service';
+
 
 @Component({
   selector: 'app-statistics',
@@ -21,6 +24,7 @@ export class StatisticsComponent implements OnInit, OnDestroy {
   statisticQuestionGroup2: StatisticsQuestionGroup;
   statisticQuestionGroup3: StatisticsQuestionGroup;
   statisticQuestionGroup4: StatisticsQuestionGroup;
+  sg: SuggestionGroup=suggestionGroup;
 
   constructor(private formService: FormServiceService,
     private excelService: ExcelService,
@@ -28,7 +32,7 @@ export class StatisticsComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.formSubscription = this.formService.getAll().subscribe(f => {
-      this.forms = f.filter(f => f.filled == true);
+      this.forms = [...f.filter(f => f.filled == true),...f.filter(f => f.filled == true)];
       this.generateStatistics();
     });
   }
