@@ -1,3 +1,4 @@
+import { suggestionGroup } from './../meta-data/form.meta-data';
 import { GeneralService } from './general.service';
 import { Question } from 'src/app/models/question.model';
 import { Form } from './../models/form.model';
@@ -16,16 +17,17 @@ export class ExcelService {
   constructor(private generalService: GeneralService) { }
 
   exportStatistics(stattisticsQuestionGroupes: StatisticsQuestionGroup[], filename: string) {
-    let workbook = new Workbook();
-    let worksheet = workbook.addWorksheet('sheet');
+    let wb = new Workbook();
+    let ws = wb.addWorksheet('sheet');
+    let lastIndex:number=0;
 
-    worksheet.views = [{ rightToLeft: true }];
+    ws.views = [{ rightToLeft: true }];
 
     stattisticsQuestionGroupes.forEach((v, i) => {
       const index: number = (v.statisticsQuestions.length + 1 + 3) * i;
 
       //Set style for heders
-      this.styleRange(worksheet, index + 1, 1, index + 2, 11, {
+      this.styleRange(ws, index + 1, 1, index + 2, 11, {
         font: { bold: true },
         alignment: {
           vertical: 'middle',
@@ -39,7 +41,7 @@ export class ExcelService {
       });
 
       //set border for question groups
-      this.styleRange(worksheet, index + 1, 1, index + 2 + v.statisticsQuestions.length, 11, {
+      this.styleRange(ws, index + 1, 1, index + 2 + v.statisticsQuestions.length, 11, {
         border: {
           top: { style: 'thin' },
           left: { style: 'thin' },
@@ -48,45 +50,70 @@ export class ExcelService {
         }
       });
 
-      worksheet.mergeCells(index + 1, 1, index + 1, 5);
-      worksheet.getCell(index + 1, 1).value = 'وضعیت موجود (آنچه که الان هست)';
+      ws.getColumn(6).width = 60;
 
-      worksheet.mergeCells(index + 1, 7, index + 1, 11);
-      worksheet.getCell(index + 1, 7).value = 'وضعیت مطلوب (آنچه که الان باید باشد)';
+      ws.mergeCells(index + 1, 1, index + 1, 5);
+      ws.getCell(index + 1, 1).value = 'وضعیت موجود (آنچه که الان هست)';
 
-      worksheet.getCell(index + 2, 1).value = 'خیلی زیاد';
-      worksheet.getCell(index + 2, 2).value = 'زیاد';
-      worksheet.getCell(index + 2, 3).value = 'متوسط';
-      worksheet.getCell(index + 2, 4).value = 'کم';
-      worksheet.getCell(index + 2, 5).value = 'خیلی کم';
+      ws.mergeCells(index + 1, 7, index + 1, 11);
+      ws.getCell(index + 1, 7).value = 'وضعیت مطلوب (آنچه که الان باید باشد)';
 
-      worksheet.mergeCells(index + 1, 6, index + 2, 6);
-      worksheet.getCell(index + 1, 6).value = v.titlef;
+      ws.getCell(index + 2, 1).value = 'خیلی زیاد';
+      ws.getCell(index + 2, 2).value = 'زیاد';
+      ws.getCell(index + 2, 3).value = 'متوسط';
+      ws.getCell(index + 2, 4).value = 'کم';
+      ws.getCell(index + 2, 5).value = 'خیلی کم';
 
-      worksheet.getCell(index + 2, 7).value = 'خیلی زیاد';
-      worksheet.getCell(index + 2, 8).value = 'زیاد';
-      worksheet.getCell(index + 2, 9).value = 'متوسط';
-      worksheet.getCell(index + 2, 10).value = 'کم';
-      worksheet.getCell(index + 2, 11).value = 'خیلی کم';
+      ws.mergeCells(index + 1, 6, index + 2, 6);
+      ws.getCell(index + 1, 6).value = v.titlef;
+
+      ws.getCell(index + 2, 7).value = 'خیلی زیاد';
+      ws.getCell(index + 2, 8).value = 'زیاد';
+      ws.getCell(index + 2, 9).value = 'متوسط';
+      ws.getCell(index + 2, 10).value = 'کم';
+      ws.getCell(index + 2, 11).value = 'خیلی کم';
 
       v.statisticsQuestions.forEach((qv, qi) => {
-        worksheet.getCell(index + 3 + qi, 1).value = this.generalService.getQuestionAnswerCount(qv.noramlAnswers, 'زۆر زۆر');
-        worksheet.getCell(index + 3 + qi, 2).value = this.generalService.getQuestionAnswerCount(qv.noramlAnswers, 'زۆر');
-        worksheet.getCell(index + 3 + qi, 3).value = this.generalService.getQuestionAnswerCount(qv.noramlAnswers, 'مامناوەند');
-        worksheet.getCell(index + 3 + qi, 4).value = this.generalService.getQuestionAnswerCount(qv.noramlAnswers, 'كەم');
-        worksheet.getCell(index + 3 + qi, 5).value = this.generalService.getQuestionAnswerCount(qv.noramlAnswers, 'زۆر كەم');
-        worksheet.getCell(index + 3 + qi, 6).value = qv.titlef;
-        worksheet.getCell(index + 3 + qi, 7).value = this.generalService.getQuestionAnswerCount(qv.wantedAnswers, 'زۆر زۆر');
-        worksheet.getCell(index + 3 + qi, 8).value = this.generalService.getQuestionAnswerCount(qv.wantedAnswers, 'زۆر');
-        worksheet.getCell(index + 3 + qi, 9).value = this.generalService.getQuestionAnswerCount(qv.wantedAnswers, 'مامناوەند');
-        worksheet.getCell(index + 3 + qi, 10).value = this.generalService.getQuestionAnswerCount(qv.wantedAnswers, 'كەم');
-        worksheet.getCell(index + 3 + qi, 11).value = this.generalService.getQuestionAnswerCount(qv.wantedAnswers, 'زۆر كەم');
+        ws.getCell(index + 3 + qi, 1).value = this.generalService.getQuestionAnswerCount(qv.noramlAnswers, 'زۆر زۆر');
+        ws.getCell(index + 3 + qi, 2).value = this.generalService.getQuestionAnswerCount(qv.noramlAnswers, 'زۆر');
+        ws.getCell(index + 3 + qi, 3).value = this.generalService.getQuestionAnswerCount(qv.noramlAnswers, 'مامناوەند');
+        ws.getCell(index + 3 + qi, 4).value = this.generalService.getQuestionAnswerCount(qv.noramlAnswers, 'كەم');
+        ws.getCell(index + 3 + qi, 5).value = this.generalService.getQuestionAnswerCount(qv.noramlAnswers, 'زۆر كەم');
+        ws.getCell(index + 3 + qi, 6).value = qv.titlef;
+        ws.getCell(index + 3 + qi, 7).value = this.generalService.getQuestionAnswerCount(qv.wantedAnswers, 'زۆر زۆر');
+        ws.getCell(index + 3 + qi, 8).value = this.generalService.getQuestionAnswerCount(qv.wantedAnswers, 'زۆر');
+        ws.getCell(index + 3 + qi, 9).value = this.generalService.getQuestionAnswerCount(qv.wantedAnswers, 'مامناوەند');
+        ws.getCell(index + 3 + qi, 10).value = this.generalService.getQuestionAnswerCount(qv.wantedAnswers, 'كەم');
+        ws.getCell(index + 3 + qi, 11).value = this.generalService.getQuestionAnswerCount(qv.wantedAnswers, 'زۆر كەم');
+
+        lastIndex=index+3+qi;
       });
     });
 
-    worksheet.getColumn(6).width = 60;
+    ws.mergeCells(lastIndex+3,1,lastIndex+3,2);
+    //Set style for heders
+    this.styleRange(ws, lastIndex+3, 1, lastIndex+3, 1, {
+      font: { bold: true },
+      alignment: {
+        vertical: 'middle',
+        horizontal: 'center'
+      },
+      fill: {
+        type: 'pattern',
+        pattern: 'solid',
+        fgColor: { argb: '95B3D7' }
+      }
+    });
+    ws.getCell(lastIndex+3,1).value=suggestionGroup.titlef;
 
-    workbook.xlsx.writeBuffer().then((data) => {
+    suggestionGroup.suggestions.forEach((v,i)=>{
+      ws.getCell(lastIndex+3+i+1,1).value=i+1;
+      ws.getCell(lastIndex+3+i+1,2).value=v.value;
+    });
+
+    this.setBorder(ws,lastIndex+3,1,lastIndex+3+1+suggestionGroup.suggestions.length,2);
+
+    wb.xlsx.writeBuffer().then((data) => {
       let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
       fs.saveAs(blob, filename + '.xlsx');
     });
