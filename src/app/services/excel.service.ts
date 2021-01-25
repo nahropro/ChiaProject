@@ -1,13 +1,13 @@
-import { suggestionGroup } from './../meta-data/form.meta-data';
-import { GeneralService } from './general.service';
-import { Question } from 'src/app/models/question.model';
-import { Form } from './../models/form.model';
-import { StatisticsQuestionGroup } from './../models/statistics-question-group.model';
 import { Injectable } from '@angular/core';
 import { Style, Workbook, Worksheet } from 'exceljs';
-import { StatisticsCount } from '../models/statistics-count.model';
 import * as fs from 'file-saver';
+import * as _ from 'lodash';
+import { Question } from 'src/app/models/question.model';
 import { questionGroup1, questionGroup2, questionGroup3, questionGroup4 } from '../meta-data/form.meta-data';
+import { suggestionGroup } from './../meta-data/form.meta-data';
+import { Form } from './../models/form.model';
+import { StatisticsQuestionGroup } from './../models/statistics-question-group.model';
+import { GeneralService } from './general.service';
 
 @Injectable({
   providedIn: 'root'
@@ -128,9 +128,11 @@ export class ExcelService {
   }
 
   exportForms(forms: Form[], filename: string) {
+    const formsDuplicated: Form[]=[...forms,...forms];
+
     let wb = new Workbook();
 
-    this.exportFormsSheet1(wb, forms);
+    this.exportFormsSheet1(wb, _.shuffle(formsDuplicated));
     this.exportFormsSheet2(wb);
 
     wb.xlsx.writeBuffer().then((data) => {
@@ -146,37 +148,35 @@ export class ExcelService {
 
     //Set headers
     //Set personal info headers
-    ws.getCell(1, 1).value = 'نام'.replace(/ /g,'_');
-    ws.getCell(1, 2).value = 'سن'.replace(/ /g,'_');
-    ws.getCell(1, 3).value = 'جنسیت'.replace(/ /g,'_');
-    ws.getCell(1, 4).value = 'میزان تحصیلات'.replace(/ /g,'_');
-    ws.getCell(1, 5).value = 'سابقه مدت کاري'.replace(/ /g,'_');
-    ws.getCell(1, 6).value = 'موقعیت شغلی'.replace(/ /g,'_');
-    ws.getCell(1, 7).value = 'رشته تخصصی'.replace(/ /g,'_');
+    ws.getCell(1, 1).value = 'سن'.replace(/ /g,'_');
+    ws.getCell(1, 2).value = 'جنسیت'.replace(/ /g,'_');
+    ws.getCell(1, 3).value = 'میزان تحصیلات'.replace(/ /g,'_');
+    ws.getCell(1, 4).value = 'سابقه مدت کاري'.replace(/ /g,'_');
+    ws.getCell(1, 5).value = 'موقعیت شغلی'.replace(/ /g,'_');
+    ws.getCell(1, 6).value = 'رشته تخصصی'.replace(/ /g,'_');
 
     //Set question headers
     const questions: Question[] = [...questionGroup1.questions, ...questionGroup2.questions, ...questionGroup3.questions, ...questionGroup4.questions];
     questions.forEach((qv, qi) => {
-      ws.getCell(1, 7 + (qi * 2) + 1).value = (qv.titlef + ' (موجود)').replace(/ /g,'_');
-      ws.getCell(1, 7 + (qi * 2) + 1 + 1).value = (qv.titlef + ' (مطلوب)').replace(/ /g,'_');
+      ws.getCell(1, 6 + (qi * 2) + 1).value = (qv.titlef + ' (موجود)').replace(/ /g,'_');
+      ws.getCell(1, 6 + (qi * 2) + 1 + 1).value = (qv.titlef + ' (مطلوب)').replace(/ /g,'_');
     })
 
     forms.forEach((v, i) => {
       //Set personal info data
-      ws.getCell(i + 1 + 1, 1).value = v.personalInfo.fullName;
-      ws.getCell(i + 1 + 1, 2).value = v.personalInfo.age;
-      ws.getCell(i + 1 + 1, 3).value = v.personalInfo.gender === 'نێر' ? 1 : 2;
-      ws.getCell(i + 1 + 1, 4).value = this.generalService.getNumericalValueOfEducationLevel(v.personalInfo.educationLevel);
-      ws.getCell(i + 1 + 1, 5).value = this.generalService.getNumericalValueOfJobExperience(v.personalInfo.jobExperience);
-      ws.getCell(i + 1 + 1, 6).value = this.generalService.getNumericalValueOfJobType(v.personalInfo.jobType);
-      ws.getCell(i + 1 + 1, 7).value = this.generalService.getNumericalValueOfExperienceType(v.personalInfo.experienceType);
+      ws.getCell(i + 1 + 1, 1).value = v.personalInfo.age;
+      ws.getCell(i + 1 + 1, 2).value = v.personalInfo.gender === 'نێر' ? 1 : 2;
+      ws.getCell(i + 1 + 1, 3).value = this.generalService.getNumericalValueOfEducationLevel(v.personalInfo.educationLevel);
+      ws.getCell(i + 1 + 1, 4).value = this.generalService.getNumericalValueOfJobExperience(v.personalInfo.jobExperience);
+      ws.getCell(i + 1 + 1, 5).value = this.generalService.getNumericalValueOfJobType(v.personalInfo.jobType);
+      ws.getCell(i + 1 + 1, 6).value = this.generalService.getNumericalValueOfExperienceType(v.personalInfo.experienceType);
 
       //Set question result
       const questions: Question[] = [...v.questionGroup1.questions, ...v.questionGroup2.questions, ...v.questionGroup3.questions, ...v.questionGroup4.questions];
 
       questions.forEach((qv, qi) => {
-        ws.getCell(i + 1 + 1, 7 + (qi * 2) + 1).value = this.generalService.getNumericalValueOfAnswer(qv.normalAnswer);
-        ws.getCell(i + 1 + 1, 7 + (qi * 2) + 1 + 1).value = this.generalService.getNumericalValueOfAnswer(qv.wantedAnswer);
+        ws.getCell(i + 1 + 1, 6 + (qi * 2) + 1).value = this.generalService.getNumericalValueOfAnswer(qv.normalAnswer);
+        ws.getCell(i + 1 + 1, 6 + (qi * 2) + 1 + 1).value = this.generalService.getNumericalValueOfAnswer(qv.wantedAnswer);
       })
     });
   }
