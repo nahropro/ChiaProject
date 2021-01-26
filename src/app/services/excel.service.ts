@@ -111,7 +111,7 @@ export class ExcelService {
       ws.getCell(lastIndex+3+i+1,2).value=v.value;
     });
 
-    this.setBorder(ws,lastIndex+3,1,lastIndex+3+1+suggestionGroup.suggestions.length,2);
+    this.setBorder(ws,lastIndex+3,1,lastIndex+3+suggestionGroup.suggestions.length,2);
 
     wb.xlsx.writeBuffer().then((data) => {
       let blob = new Blob([data], { type: 'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet' });
